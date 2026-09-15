@@ -57,7 +57,7 @@ const BERLIN_DAY = new Intl.DateTimeFormat("en-CA", {
   day: "2-digit"
 });
 
-function berlinDayStartUtc(instant: Date): number {
+export function berlinDayStartUtc(instant: Date): number {
   const [year, month, day] = BERLIN_DAY.format(instant).split("-").map(Number);
   return Date.UTC(year, month - 1, day);
 }

@@ -1,4 +1,4 @@
-import { tradingDays } from "./ranking";
+import { berlinDayStartUtc, tradingDays } from "./ranking";
 import type { ClientBooking, EventOpportunity } from "./types";
 
 export type WeeklyRole = "Primary" | "Backup" | "Verify first" | "Blocked" | "Closed";
@@ -24,8 +24,17 @@ export interface EventWeek {
 
 const MS_DAY = 86_400_000;
 
-function isoWeek(date: Date) {
-  const utc = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+/*
+ * All week math runs in the operator's Berlin civil calendar, anchored at UTC
+ * midnight of the Berlin date. Host-local getters made the grouping depend on
+ * the machine's timezone (a booking ending 23:00+02:00 gained a fourth week on
+ * a Pacific host, and anything ending 00:00-02:00 Berlin mis-bucketed on UTC).
+ * The UTC anchors keep comparisons total-ordered; a week's `endsAt` overshoots
+ * the true Berlin Sunday end by at most two hours, which only ever keeps a
+ * finishing week visible slightly longer - never drops one early.
+ */
+function isoWeek(mondayAnchor: Date) {
+  const utc = new Date(mondayAnchor.getTime());
   const day = utc.getUTCDay() || 7;
   utc.setUTCDate(utc.getUTCDate() + 4 - day);
   const yearStart = new Date(Date.UTC(utc.getUTCFullYear(), 0, 1));
@@ -34,18 +43,13 @@ function isoWeek(date: Date) {
 }
 
 function mondayFor(date: Date) {
-  const value = new Date(date);
-  const day = value.getDay() || 7;
-  value.setHours(0, 0, 0, 0);
-  value.setDate(value.getDate() - day + 1);
-  return value;
+  const anchor = berlinDayStartUtc(date);
+  const day = new Date(anchor).getUTCDay() || 7;
+  return new Date(anchor - (day - 1) * MS_DAY);
 }
 
 function sundayFor(monday: Date) {
-  const sunday = new Date(monday);
-  sunday.setDate(sunday.getDate() + 6);
-  sunday.setHours(23, 59, 59, 999);
-  return sunday;
+  return new Date(monday.getTime() + 7 * MS_DAY - 1);
 }
 
 function weekKey(monday: Date) {
@@ -55,9 +59,11 @@ function weekKey(monday: Date) {
 
 function weekStartsInRange(startsAt: string, endsAt: string): Date[] {
   const starts = mondayFor(new Date(startsAt));
-  const ends = new Date(endsAt);
+  // Compare in civil space: the last week is the one holding the Berlin
+  // calendar day the range ends on, wherever the host happens to run.
+  const endAnchor = berlinDayStartUtc(new Date(endsAt));
   const weeks: Date[] = [];
-  for (const cursor = new Date(starts); cursor <= ends; cursor.setDate(cursor.getDate() + 7)) {
+  for (let cursor = starts.getTime(); cursor <= endAnchor; cursor += 7 * MS_DAY) {
     weeks.push(new Date(cursor));
   }
   return weeks;
