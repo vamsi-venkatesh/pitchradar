@@ -87,7 +87,7 @@ export function classifyRetrievalIntents(query: string): RetrievalIntent[] {
   if (/(business|truck|menu|cost|margin|revenue|power|water|postcode|profile|permit|portion)/.test(value)) intents.add("business_profile");
   if (/(remember|memory|say|said|told|decision|constraint|noted|recall)/.test(value)) intents.add("memory");
   if (/(live|verify|recheck|official page|check now|current source)/.test(value)) intents.add("live_verification");
-  if (/(send|submit|email|whatsapp|contact organizer|calendar action)/.test(value)) intents.add("external_action");
+  if (/(send|submit|email|contact organizer|calendar action)/.test(value)) intents.add("external_action");
   if (!intents.size) intents.add("general");
   return [...intents];
 }

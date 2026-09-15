@@ -2,12 +2,15 @@
  * APPROVAL BOUNDARY, END TO END — driven through the REAL HTTP handler.
  *
  * PitchRadar's whole safety claim is one sentence: an approval is a decision
- * recorded in state, and nothing in this repo can send. The three `/decision`
+ * recorded in state, and nothing in this repo can send. The two `/decision`
  * routes are where that claim is either true or false:
  *
  *   POST /api/agent/actions/:id/decision                     (owner)
  *   POST /api/outreach/requests/:id/decision                 (owner)
- *   POST /api/integrations/gateway/actions/:id/decision        (WhatsApp gateway)
+ *
+ * They are also the ONLY two. There is no second, non-owner way in: a decision
+ * path outside `/api/agent` and `/api/outreach` is not a route at all, and a
+ * case below proves the handler does not claim one.
  *
  * Until now they had essentially no coverage. This file exercises them against
  * `handleAgentApi` itself — same request/response fakes as `http.test.ts` — and
@@ -28,11 +31,8 @@ import { Readable } from "node:stream";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { createOwnerSession } from "./auth";
-import { resetGatewayNoncesForTests, signGatewayRequest } from "./gateway-auth";
 import { handleAgentApi } from "./http";
 import { createAction, readRuntimeState } from "./store";
-
-const GATEWAY_SECRET = "a-gateway-secret-of-at-least-32-characters!!";
 
 let fetchSpy: ReturnType<typeof vi.fn>;
 
@@ -75,25 +75,6 @@ async function invoke(input: {
   return { handled, status: response.statusCode, body };
 }
 
-/** A signed gateway request, so the route's own proof check is satisfied. */
-function signedGatewayHeaders(method: string, pathname: string, rawBody: string) {
-  const timestamp = String(Date.now());
-  const nonce = `nonce-${Math.random().toString(36).slice(2)}-${Date.now()}`;
-  return {
-    "content-type": "application/json",
-    "x-gateway-timestamp": timestamp,
-    "x-gateway-nonce": nonce,
-    "x-gateway-signature": signGatewayRequest({
-      secret: GATEWAY_SECRET,
-      method,
-      path: pathname,
-      timestamp,
-      nonce,
-      rawBody
-    })
-  };
-}
-
 let runtimeDir = "";
 
 async function useTemporaryRuntime() {
@@ -117,7 +98,6 @@ async function actionById(id: string) {
 }
 
 beforeEach(() => {
-  resetGatewayNoncesForTests();
   fetchSpy = vi.fn(async () => {
     throw new Error("approval must never send: an outbound fetch was attempted");
   });
@@ -134,7 +114,7 @@ afterEach(async () => {
 });
 
 // ── (a) nobody gets in without credentials ───────────────────────────────────
-describe("unauthenticated decisions are refused on all three routes", () => {
+describe("unauthenticated decisions are refused on every decision route", () => {
   function requireOwnerAuth() {
     vi.stubEnv("PITCHRADAR_AUTH_MODE", "required");
     vi.stubEnv("PITCHRADAR_SESSION_SECRET", "a-session-secret-of-at-least-32-characters!!");
@@ -171,75 +151,55 @@ describe("unauthenticated decisions are refused on all three routes", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("refuses a gateway decision when no gateway secret is configured (503)", async () => {
+  it("offers no second, non-owner decision route at all", async () => {
+    // The owner routes above are the only decision paths that exist. A request
+    // to any other /api/integrations/... decision path is not authenticated by
+    // some weaker proof — it is not a route: the API handler declines it, so a
+    // caller reaches the static handler and never the action store.
     vi.stubEnv("PITCHRADAR_AUTH_MODE", "disabled");
-    vi.stubEnv("PITCHRADAR_GATEWAY_SECRET", "");
-    const result = await invoke({
-      method: "POST",
-      url: `/api/integrations/gateway/actions/${crypto.randomUUID()}/decision`,
-      body: JSON.stringify({ decision: "approve", actorId: "owner", tenantId: "demo-operator", gatewayMessageId: "m-1" }),
-      headers: { "content-type": "application/json" }
-    });
-    expect(result).toMatchObject({
-      status: 503,
-      body: { error: "The PitchRadar gateway integration is not configured." }
-    });
+    await useTemporaryRuntime();
+    const action = await pendingAction("Email the Dresden organizer");
+
+    for (const url of [
+      `/api/integrations/actions/${action.id}/decision`,
+      `/api/integrations/messaging/actions/${action.id}/decision`,
+      `/api/actions/${action.id}/decision`
+    ]) {
+      const result = await invoke({
+        method: "POST",
+        url,
+        body: JSON.stringify({ decision: "approve" }),
+        headers: { "content-type": "application/json" }
+      });
+      expect(result.handled).toBe(false);
+    }
+
+    // The refusal is complete: the action never moved.
+    expect(await actionById(action.id)).toMatchObject({ status: "pending" });
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("refuses a gateway decision whose proof is unsigned or forged (401)", async () => {
-    vi.stubEnv("PITCHRADAR_AUTH_MODE", "disabled");
-    vi.stubEnv("PITCHRADAR_GATEWAY_SECRET", GATEWAY_SECRET);
-    const body = JSON.stringify({
-      decision: "approve",
-      actorId: "owner",
-      tenantId: "demo-operator",
-      gatewayMessageId: "m-2"
-    });
-    const unsigned = await invoke({
+  it("refuses an agent-action decision from an external caller with no session, whatever it sends", async () => {
+    requireOwnerAuth();
+    await useTemporaryRuntime();
+    const action = await pendingAction("Email the Cottbus organizer");
+    const result = await invoke({
       method: "POST",
-      url: `/api/integrations/gateway/actions/${crypto.randomUUID()}/decision`,
-      body,
-      headers: { "content-type": "application/json" }
+      url: `/api/agent/actions/${action.id}/decision`,
+      body: JSON.stringify({
+        decision: "approve",
+        // Fields a would-be integration might hope are honoured. None are.
+        actorId: "owner",
+        tenantId: "demo-operator",
+        messageId: "external-1"
+      }),
+      headers: { "content-type": "application/json", "x-forwarded-for": "10.0.0.9" }
     });
-    expect(unsigned.status).toBe(401);
-
-    const pathname = `/api/integrations/gateway/actions/${crypto.randomUUID()}/decision`;
-    const headers = signedGatewayHeaders("POST", pathname, body);
-    const forged = await invoke({
-      method: "POST",
-      url: pathname,
-      // The signature covers the body; changing it after signing must fail.
-      body: JSON.stringify({ ...JSON.parse(body), decision: "deny" }),
-      headers
-    });
-    expect(forged).toMatchObject({
+    expect(result).toMatchObject({
       status: 401,
-      body: { error: "The gateway request signature is invalid." }
+      body: { error: "Owner authentication required." }
     });
-    expect(fetchSpy).not.toHaveBeenCalled();
-  });
-
-  it("refuses a correctly signed gateway decision from the wrong tenant (403)", async () => {
-    vi.stubEnv("PITCHRADAR_AUTH_MODE", "disabled");
-    vi.stubEnv("PITCHRADAR_GATEWAY_SECRET", GATEWAY_SECRET);
-    const pathname = `/api/integrations/gateway/actions/${crypto.randomUUID()}/decision`;
-    const body = JSON.stringify({
-      decision: "approve",
-      actorId: "owner",
-      tenantId: "someone-else",
-      gatewayMessageId: "m-3"
-    });
-    const result = await invoke({
-      method: "POST",
-      url: pathname,
-      body,
-      headers: signedGatewayHeaders("POST", pathname, body)
-    });
-    expect(result).toMatchObject({
-      status: 403,
-      body: { error: "The gateway actor, tenant, or idempotency identity is invalid." }
-    });
+    expect(await actionById(action.id)).toMatchObject({ status: "pending" });
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 });
@@ -331,32 +291,32 @@ describe("an approved action is held, never sent", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  it("holds a gateway-approved action in exactly the same state", async () => {
+  it("holds an approved action in the same state whatever KIND it is", async () => {
+    // The gate is on the ACT, not the medium: every proposable kind lands on
+    // `approved_waiting_connector` and none of them sends.
     vi.stubEnv("PITCHRADAR_AUTH_MODE", "disabled");
-    vi.stubEnv("PITCHRADAR_GATEWAY_SECRET", GATEWAY_SECRET);
     await useTemporaryRuntime();
-    const action = await pendingAction("WhatsApp the Dresden organizer");
 
-    const pathname = `/api/integrations/gateway/actions/${action.id}/decision`;
-    const body = JSON.stringify({
-      decision: "approve",
-      actorId: "owner",
-      tenantId: "demo-operator",
-      gatewayMessageId: `gw-${action.id}`
-    });
-    const result = await invoke({
-      method: "POST",
-      url: pathname,
-      body,
-      headers: signedGatewayHeaders("POST", pathname, body)
-    });
+    for (const kind of ["email", "application", "calendar", "organizer_contact"] as const) {
+      const action = await createAction({
+        kind,
+        title: `Prepared ${kind} for the Dresden organizer`,
+        detail: "Draft only. Nothing in this repo can send it."
+      });
+      const result = await invoke({
+        method: "POST",
+        url: `/api/agent/actions/${action.id}/decision`,
+        body: JSON.stringify({ decision: "approve" }),
+        headers: { "content-type": "application/json" }
+      });
+      expect(result.status).toBe(200);
+      expect(result.body).toMatchObject({
+        action: { id: action.id, status: "approved_waiting_connector" },
+        note: "Approved and held. No connector is enabled, so nothing was sent."
+      });
+      expect(await actionById(action.id)).toMatchObject({ status: "approved_waiting_connector" });
+    }
 
-    expect(result.status).toBe(200);
-    expect(result.body).toMatchObject({
-      action: { id: action.id, status: "approved_waiting_connector" },
-      note: "Approved and held. No connector is enabled, so nothing was sent."
-    });
-    expect(await actionById(action.id)).toMatchObject({ status: "approved_waiting_connector" });
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 });

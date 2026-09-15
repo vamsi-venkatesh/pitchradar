@@ -8,13 +8,13 @@ This repository is the engineering core of a system that runs for a real operato
 
 **The live operator database.** No dump, snapshot or extract of the production database is present. The committed sample report is generated from the repository's own fixture snapshot with a pinned `--now`; its counts are fixture counts.
 
-**The messaging-gateway integration.** The signed internal routes are in the code (they are the interesting part: method/path/timestamp/nonce/body-digest binding, per-message idempotency, a secret independent of browser sessions), but the gateway service itself, its credentials, its consent and template handling, and its delivery transport are not part of this repository.
+**External execution.** PitchRadar discovers, qualifies, recommends, prepares and records owner-approved intent. It does not autonomously contact organizers or submit applications. External execution remains outside the published proof. No delivery integration — none of its code, credentials or transport — is part of this repository.
 
 **The full curated source registry.** The private deployment carries a curated registry of dozens of municipal, tourism, organizer, directory and procurement sources — which is the accumulated research, not the engineering. This repository keeps ten representative entries: the six whose extractors the replay harness actually exercises, and four public municipal or tourism census sources. Every other row is a placeholder marked "configured per deployment". The extraction code is complete; only the curated list of real sites is withheld.
 
 **Real contact rows.** Every organizer, municipal and partner email address and telephone number in the fixtures has been replaced with an `@example-*.de` address and a `+49 30 0000000`-pattern number. Real German city names and generic event names ("Street Food Festival &lt;City&gt;") are kept, because they carry no one's identity.
 
-**Credentials.** No API key, password hash, session secret, gateway secret or database URL appears anywhere in this repository or in its commit history.
+**Credentials.** No API key, password hash, session secret or database URL appears anywhere in this repository or in its commit history.
 
 ---
 

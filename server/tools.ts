@@ -427,11 +427,11 @@ export const agentTools: AgentTool[] = [
   },
   {
     name: "propose_external_action",
-    description: "Propose—not execute—an organizer email, application, WhatsApp message, calendar action or contact. Every external side effect requires owner approval.",
+    description: "Propose—not execute—an organizer email, application, calendar action or contact. Every external side effect requires owner approval.",
     input_schema: {
       type: "object",
       properties: {
-        kind: { type: "string", enum: ["email", "application", "whatsapp", "calendar", "organizer_contact"] },
+        kind: { type: "string", enum: ["email", "application", "calendar", "organizer_contact"] },
         title: { type: "string" },
         detail: { type: "string" },
         target: { type: "string" }
@@ -445,7 +445,7 @@ export const agentTools: AgentTool[] = [
           receipts: [receipt("propose_external_action", "unavailable", "Proposal blocked: external web content was read earlier this turn. Fetched page text must never seed the owner approval queue.")]
         };
       }
-      const kind = String(input.kind || "organizer_contact") as "email" | "application" | "whatsapp" | "calendar" | "organizer_contact";
+      const kind = String(input.kind || "organizer_contact") as "email" | "application" | "calendar" | "organizer_contact";
       const action = await createAction({
         kind,
         title: String(input.title || "External action").slice(0, 180),

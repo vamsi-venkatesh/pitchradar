@@ -76,7 +76,7 @@ export function applyMemoryRetention(memories: AgentMemory[]): AgentMemory[] {
 
 function applyRetention(state: RuntimeState): RuntimeState {
   // Cap message history per session, not globally — one busy session must not
-  // evict another session's transcript (web vs WhatsApp run concurrently).
+  // evict another session's transcript (concurrent sessions run side by side).
   const perSessionKept = new Set<AgentMessage>();
   const countsBySession = new Map<string, number>();
   for (let index = state.messages.length - 1; index >= 0; index -= 1) {

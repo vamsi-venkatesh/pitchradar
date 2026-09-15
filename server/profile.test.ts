@@ -246,7 +246,7 @@ describe("missing input recomputation", () => {
     expect(missing).toContain("Client confirmation of the menu names and prices");
     expect(missing).toContain("Exact postcode / starting address");
     expect(missing).toContain("Consent to store business data for applications");
-    expect(missing).toHaveLength(12);
+    expect(missing).toHaveLength(11);
   });
 
   it("shrinks as sections are completed, and never on a deferred answer", () => {
@@ -258,7 +258,7 @@ describe("missing input recomputation", () => {
     };
     const afterPostcode = recomputeMissingInputs(intake, null);
     expect(afterPostcode).not.toContain("Exact postcode / starting address");
-    expect(afterPostcode).toHaveLength(11);
+    expect(afterPostcode).toHaveLength(10);
 
     // "I don't know yet" is an honest answer, but it closes no gap.
     intake.economics = validateSectionAnswers("economics", {
@@ -274,9 +274,9 @@ describe("missing input recomputation", () => {
     };
     const afterCosts = recomputeMissingInputs(intake, null);
     expect(afterCosts).not.toContain("Food, labour and travel costs");
-    expect(afterCosts).toHaveLength(10);
+    expect(afterCosts).toHaveLength(9);
 
-    expect(recomputeMissingInputs(intake, now)).toHaveLength(9);
+    expect(recomputeMissingInputs(intake, now)).toHaveLength(8);
   });
 });
 

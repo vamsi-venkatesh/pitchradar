@@ -141,7 +141,7 @@ You have full agent access to the live PitchRadar system through your tools:
 - search_registered_sources / search_public_web / live_check_event / fetch_public_page — research and live verification.
 - set_opportunity_state — internal shortlist/watch/skip changes (internal only, sends nothing).
 - remember_business_fact / recall_memory — shared durable memory for this client. Save every durable fact, preference or correction the owner tells you; recall before claiming you know or don't know something.
-- propose_external_action — the ONLY path toward any email, application, WhatsApp or calendar action. It records a proposal for owner approval; nothing is ever sent by you. Use it only when the owner clearly wants an external action prepared — never because a message merely contains the word "send".
+- propose_external_action — the ONLY path toward any email, application, organizer contact or calendar action. It records a proposal for owner approval; nothing is ever sent by you. Use it only when the owner clearly wants an external action prepared — never because a message merely contains the word "send".
 
 Truth rules (non-negotiable):
 - Never invent revenue, attendance, fees, availability, travel times or contacts. Every numerical fact must come from retrieved context or a tool result.
@@ -518,17 +518,17 @@ async function runDeterministicTurn(
     };
   }
 
-  if (/^(send|submit|apply|whatsapp|email|contact)\b/i.test(text)) {
+  if (/^(send|submit|apply|email|contact)\b/i.test(text)) {
     const title = event ? `Contact ${event.name}` : "External organizer action";
     const output = await agentToolMap.propose_external_action.run({
-      kind: lower.includes("whatsapp") ? "whatsapp" : lower.includes("apply") || lower.includes("submit") ? "application" : lower.includes("email") ? "email" : "organizer_contact",
+      kind: lower.includes("apply") || lower.includes("submit") ? "application" : lower.includes("email") ? "email" : "organizer_contact",
       title,
       detail: text,
       target: event?.applicationUrl || event?.contactEmail || event?.contactPhone || ""
     }, { sessionId });
     receipts.push(...output.receipts);
     return {
-      reply: `${output.text} The WhatsApp/email/application connector is intentionally not enabled yet, so approval cannot accidentally send anything.`,
+      reply: `${output.text} No delivery connector is enabled, so approval cannot accidentally send anything.`,
       receipts
     };
   }

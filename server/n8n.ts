@@ -8,7 +8,6 @@ export interface N8nAutomationReadiness {
   channels: {
     googleSheets: { state: AutomationChannelState; required: string[] };
     email: { state: AutomationChannelState; required: string[] };
-    whatsapp: { state: AutomationChannelState; transport: "whatsapp_gateway"; required: string[] };
   };
   externalActions: 0;
   checkedAt: string;
@@ -23,11 +22,6 @@ const defaultChannels: N8nAutomationReadiness["channels"] = {
   email: {
     state: "awaiting_client_configuration",
     required: ["email credential", "from address", "approved recipients"]
-  },
-  whatsapp: {
-    state: "awaiting_client_configuration",
-    transport: "whatsapp_gateway",
-    required: ["owner number", "explicit opt-in", "approved Meta template", "paired gateway identity"]
   }
 };
 
@@ -68,7 +62,7 @@ export async function checkN8nReadiness(): Promise<N8nAutomationReadiness> {
         occurredAt: new Date().toISOString(),
         tenantId: "demo-operator",
         projectId: "pitchradar",
-        requestedChannels: ["google_sheets", "email", "whatsapp"]
+        requestedChannels: ["google_sheets", "email"]
       })
     });
     if (!response.ok) {

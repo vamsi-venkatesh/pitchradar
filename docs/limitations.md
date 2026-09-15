@@ -4,11 +4,11 @@ Stated plainly, because a system that hides these is harder to trust than one th
 
 ## Single-tenant by construction
 
-The tenant is hard-coded. A tenant UUID is a module constant in several server stages, the gateway route accepts exactly one tenant identifier, and shared memory is scoped by a fixed `tenantId` / `appId` pair. This was a deliberate trade for a single-operator product and it is not a multi-tenant system: making it one means threading tenancy through the stages, the retrieval layer and the reports, not flipping a flag.
+The tenant is hard-coded. A tenant UUID is a module constant in several server stages, and shared memory is scoped by a fixed `tenantId` / `appId` pair. This was a deliberate trade for a single-operator product and it is not a multi-tenant system: making it one means threading tenancy through the stages, the retrieval layer and the reports, not flipping a flag.
 
 ## Proposal-only — there are no outbound connectors
 
-Nothing leaves the system. `propose_external_action` creates a held proposal and never executes; approval records `approved_waiting_connector` and stops. No email, application-form or WhatsApp connector is implemented, in this repository or in the private deployment. That is a design position (a human approves every outbound message in this domain), but it also means the last mile is unbuilt: a delivery connector would need its own implementation, credentials, consent handling, templates and audit before it could send anything.
+Nothing leaves the system. `propose_external_action` creates a held proposal and never executes; approval records `approved_waiting_connector` and stops. PitchRadar discovers, qualifies, recommends, prepares and records owner-approved intent. It does not autonomously contact organizers or submit applications. External execution remains outside the published proof. No delivery connector is implemented, in this repository or in the private deployment. That is a design position (a human approves every outbound message in this domain), but it also means the last mile is unbuilt: a delivery connector would need its own implementation, credentials, consent handling and audit before it could send anything.
 
 ## Travel gating is not yet decisive
 

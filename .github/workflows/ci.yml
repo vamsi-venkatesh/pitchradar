@@ -1,0 +1,48 @@
+name: CI
+
+# Offline by construction: no secrets, no database, no model key, no crawling.
+# The only network this job needs is the npm registry.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      # Database-dependent tests mock `pg` or skip without a connection string,
+      # and the PDF tests skip where no Chromium is already installed. Nothing
+      # here downloads a browser.
+      - name: Test
+        run: npm test
+
+      - name: Golden evals
+        run: npm run eval:golden
+
+      - name: Build
+        run: npm run build
+
+      # The generator reads no network and no clock other than --now, so the
+      # fixture brief must reproduce the committed sample byte for byte.
+      - name: Fixture brief reproduces the committed sample
+        run: |
+          npx tsx scripts/generate-report.ts \
+            --now=2026-07-27T09:00:00+02:00 --fixtures --out="$RUNNER_TEMP/report"
+          diff "$RUNNER_TEMP/report/2026-W31/pitchradar-brief-2026-W31.html" \
+            reports/sample/2026-W31/pitchradar-brief-2026-W31.html

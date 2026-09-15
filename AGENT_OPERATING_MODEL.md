@@ -166,18 +166,16 @@ Each mutation returns a receipt and changes PitchRadar only. Both refuse after a
 
 ### Approval-gated tools
 
-- `propose_external_action` — email, application, organizer contact, calendar or future WhatsApp; also refuses after a web fetch in the same turn
+- `propose_external_action` — email, application, organizer contact or calendar action; also refuses after a web fetch in the same turn
 
 The proposal is never execution. Approval currently records owner intent as `approved_waiting_connector`; it still sends nothing. A delivery connector must be separately implemented, secured and audited.
 
-### External messaging-gateway adapter
+### The external boundary
 
-PitchRadar exposes only three signed internal routes to the separate gateway: health, agent chat and
-exact pending-action decision. The gateway secret is independent from browser sessions. Every
-request is bound to method, path, timestamp, nonce and body digest, and every gateway message ID has
-an idempotency record. Only tenant `demo-operator` is accepted. WhatsApp approval can therefore
-record the same `approved_waiting_connector` intent as the web product without enabling organizer
-delivery or weakening the private owner threshold.
+PitchRadar discovers, qualifies, recommends, prepares and records owner-approved intent. It does not autonomously contact organizers or submit applications. External execution remains outside the published proof. An approval is a state
+change recorded against the owner's decision, never a delivery: it moves a held proposal to
+`approved_waiting_connector` and stops there. No delivery integration exists in this repository, and
+the private owner threshold is the only way a decision is ever recorded.
 
 ### Event-specific availability queue
 
@@ -209,7 +207,5 @@ Coverage is measured without claiming “all Germany.”
 The following capabilities are separate expansion gates, not enabled-product defects:
 
 - build the remaining high-value source-specific extraction adapters
-- obtain explicit owner WhatsApp consent and approved Meta templates
-- deploy and monitor the separate external WhatsApp gateway with official Meta transport
 - store delivery receipts and organizer responses after a connector is legally enabled
 - capture booking outcomes so actual economics can train the next-cycle ranking

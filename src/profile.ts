@@ -28,6 +28,5 @@ export const missingProfileInputs = [
   "Maximum pitch fee",
   "Minimum revenue or margin",
   "Permits, insurance and hygiene documents",
-  "Photos and existing application material",
-  "WhatsApp number and consent"
+  "Photos and existing application material"
 ];

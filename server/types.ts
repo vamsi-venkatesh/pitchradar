@@ -20,7 +20,7 @@ export interface AgentReceipt {
 
 export interface AgentAction {
   id: string;
-  kind: "email" | "application" | "whatsapp" | "calendar" | "organizer_contact";
+  kind: "email" | "application" | "calendar" | "organizer_contact";
   title: string;
   detail: string;
   target?: string;

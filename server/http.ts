@@ -18,8 +18,6 @@ import {
 import { loadProductSnapshot } from "./catalogue";
 import { latestOperatingCycle } from "./cycle";
 import { databaseHealth, insertOwnerSession } from "./database";
-import { authorizeGatewayRequest } from "./gateway-auth";
-import { GatewayRequestConflict, runGatewayRequestOnce } from "./gateway-idempotency";
 import { checkN8nReadiness } from "./n8n";
 import { decideAvailabilityRequest, refreshAvailabilityQueue } from "./outreach";
 import {
@@ -115,7 +113,6 @@ export async function handleAgentApi(request: IncomingMessage, response: ServerR
   if (
     !url.pathname.startsWith("/api/auth") &&
     !url.pathname.startsWith("/api/agent") &&
-    !url.pathname.startsWith("/api/integrations/gateway") &&
     !url.pathname.startsWith("/api/integrations/n8n") &&
     !url.pathname.startsWith("/api/outreach") &&
     !url.pathname.startsWith("/api/operations") &&
@@ -126,89 +123,6 @@ export async function handleAgentApi(request: IncomingMessage, response: ServerR
     url.pathname !== "/api/product/snapshot"
   ) return false;
   try {
-    if (url.pathname.startsWith("/api/integrations/gateway")) {
-      const rawBody = ["GET", "HEAD"].includes(request.method || "GET")
-        ? ""
-        : await readRaw(request);
-      const gatewayAuthorization = authorizeGatewayRequest(request, url.pathname, rawBody);
-      if ("status" in gatewayAuthorization) {
-        sendJson(response, gatewayAuthorization.status, { error: gatewayAuthorization.error });
-        return true;
-      }
-      if (request.method === "GET" && url.pathname === "/api/integrations/gateway/health") {
-        sendJson(response, 200, {
-          product: "PitchRadar",
-          status: "ok",
-          integration: "whatsapp_gateway",
-          outboundConnectors: false
-        });
-        return true;
-      }
-      const body = rawBody ? JSON.parse(rawBody) as Record<string, unknown> : {};
-      if (
-        typeof body.actorId !== "string" ||
-        !body.actorId ||
-        body.tenantId !== "demo-operator" ||
-        typeof body.gatewayMessageId !== "string" ||
-        !body.gatewayMessageId
-      ) {
-        sendJson(response, 403, {
-          error: "The gateway actor, tenant, or idempotency identity is invalid."
-        });
-        return true;
-      }
-      if (request.method === "POST" && url.pathname === "/api/integrations/gateway/chat") {
-        const chat = validAgentMessage(body);
-        const result = await runGatewayRequestOnce(
-          body.gatewayMessageId,
-          "chat",
-          () => chatWithAgent(chat.message, chat.sessionId)
-        );
-        sendJson(response, 200, result);
-        return true;
-      }
-      const gatewayActionMatch = url.pathname.match(
-        /^\/api\/integrations\/gateway\/actions\/([^/]+)\/decision$/
-      );
-      if (request.method === "POST" && gatewayActionMatch) {
-        const decision = body.decision === "approve"
-          ? "approve"
-          : body.decision === "deny"
-            ? "deny"
-            : null;
-        if (!decision) {
-          sendJson(response, 400, { error: "Decision must be approve or deny." });
-          return true;
-        }
-        const actionId = gatewayActionMatch[1];
-        if (!validUuid(actionId)) {
-          sendJson(response, 400, { error: "A valid action ID is required." });
-          return true;
-        }
-        const result = await runGatewayRequestOnce(
-          body.gatewayMessageId,
-          `action:${actionId}:${decision}`,
-          async () => {
-            const action = await decideAction(actionId, decision);
-            if (!action) return null;
-            return {
-              action,
-              note: decision === "approve"
-                ? "Approved and held. No connector is enabled, so nothing was sent."
-                : "Denied. Nothing was sent."
-            };
-          }
-        );
-        if (!result) {
-          sendJson(response, 404, { error: "Pending action not found." });
-          return true;
-        }
-        sendJson(response, 200, result);
-        return true;
-      }
-      sendJson(response, 404, { error: "Gateway integration route not found." });
-      return true;
-    }
     if (request.method === "GET" && url.pathname === "/api/auth/session") {
       const mode = authMode();
       if (mode === "disabled") {
@@ -576,9 +490,7 @@ export async function handleAgentApi(request: IncomingMessage, response: ServerR
         ? 404
         : error instanceof IntakeValidationError
           ? 400
-          : error instanceof GatewayRequestConflict
-            ? 409
-            : 500;
+          : 500;
     if (status === 500) {
       console.error("PitchRadar API request failed", {
         method: request.method,

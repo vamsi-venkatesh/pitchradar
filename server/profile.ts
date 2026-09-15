@@ -226,8 +226,6 @@ export const INTAKE_SECTIONS: IntakeSectionDefinition[] = [
       { id: "ownerName", kind: "text", label: "Owner full name", helper: "The person responsible for the business.", maxLength: 160 },
       { id: "email", kind: "email", label: "Business email", helper: "Where organizers should reply. International addresses are fine.", unlocks: "Lets PitchRadar draft email applications addressed from you." },
       { id: "phone", kind: "phone", label: "Business phone", helper: "Include the country code, e.g. +49 …" },
-      { id: "whatsappNumber", kind: "phone", label: "WhatsApp number", helper: "Leave empty if you do not want WhatsApp used at all." },
-      { id: "whatsappOptIn", kind: "consent", label: "WhatsApp opt-in", helper: "Switch on only if you want PitchRadar to reach you on WhatsApp. Timestamped when you do.", unlocks: "Turns on the WhatsApp channel; without it PitchRadar stays inside this app." },
       { id: "website", kind: "url", label: "Website", helper: "Full address, e.g. https://…" },
       { id: "instagram", kind: "text", label: "Instagram", helper: "Handle or profile link.", maxLength: 160 },
       { id: "facebook", kind: "text", label: "Facebook", helper: "Page name or link.", maxLength: 160 },
@@ -961,10 +959,6 @@ const MISSING_INPUT_RULES: Array<{
       "foodCloseUpPhoto",
       "kurzvorstellung"
     ])
-  },
-  {
-    label: "WhatsApp number and consent",
-    satisfied: (intake) => knownAll(intake, "business_contact", ["whatsappNumber", "whatsappOptIn"])
   },
   {
     label: "Consent to store business data for applications",

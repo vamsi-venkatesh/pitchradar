@@ -26,8 +26,7 @@ describe("PitchRadar n8n boundary", () => {
       externalActions: 0,
       channels: {
         googleSheets: { state: "awaiting_client_configuration", required: [] },
-        email: { state: "awaiting_client_configuration", required: [] },
-        whatsapp: { state: "awaiting_client_configuration", transport: "whatsapp_gateway", required: [] }
+        email: { state: "awaiting_client_configuration", required: [] }
       }
     }), { status: 200, headers: { "Content-Type": "application/json" } }));
     vi.stubGlobal("fetch", request);
