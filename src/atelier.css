@@ -1,0 +1,907 @@
+/*
+ * PitchRadar — ATELIER layer.
+ * Loaded last: the final visual authority over command-centre.css and agent.css.
+ *
+ * Direction: "the operations atelier" — an editorial instrument, not a dashboard.
+ * Warm porcelain paper, espresso ink, one copper accent. Depth comes from layered
+ * light (rim highlight + ambient shadow + contact shadow), never from heavier borders.
+ * Motion is choreographed once on entrance, then reserved for the owner's own actions.
+ * Everything here is scoped to existing PitchRadar classes so the product structure
+ * is untouched.
+ */
+
+:root {
+  /* Edges — hairlines carry alpha so they sit ON the paper instead of cutting it. */
+  --at-edge: rgba(38, 30, 24, .11);
+  --at-edge-soft: rgba(38, 30, 24, .07);
+  --at-edge-strong: rgba(38, 30, 24, .17);
+  --at-rim: rgba(255, 255, 255, .78);
+
+  /* Layered depth. Contact shadow + ambient spread + rim = physical paper. */
+  --at-lift-0:
+    0 1px 1px rgba(38, 30, 24, .04),
+    0 2px 6px rgba(38, 30, 24, .035);
+  --at-lift-1:
+    0 1px 1px rgba(38, 30, 24, .05),
+    0 4px 12px rgba(38, 30, 24, .05),
+    0 14px 34px rgba(38, 30, 24, .05);
+  --at-lift-2:
+    0 1px 2px rgba(38, 30, 24, .06),
+    0 8px 20px rgba(38, 30, 24, .07),
+    0 26px 60px rgba(38, 30, 24, .08);
+  --at-lift-3:
+    0 2px 4px rgba(20, 15, 11, .10),
+    0 18px 44px rgba(20, 15, 11, .16),
+    0 50px 110px rgba(20, 15, 11, .22);
+
+  --at-copper: var(--ss-copper, #a65f3f);
+  --at-copper-lit: #c07a55;
+  --at-copper-deep: #7f432d;
+
+  /* One curve for the whole product. */
+  --at-ease: cubic-bezier(.32, .72, 0, 1);
+  --at-ease-out: cubic-bezier(.16, 1, .3, 1);
+  --at-r: 12px;
+  --at-r-sm: 9px;
+  --at-r-lg: 16px;
+}
+
+/* ============================================================
+   1 · ATMOSPHERE — the paper itself
+   ============================================================ */
+
+.pitchradar-app {
+  position: relative;
+  background:
+    radial-gradient(120% 68% at 78% -12%, rgba(166, 95, 63, .10), transparent 62%),
+    radial-gradient(90% 50% at 8% 4%, rgba(189, 145, 64, .055), transparent 60%),
+    linear-gradient(180deg, #f6f3ee 0%, var(--ss-canvas, #f3f1ec) 42%);
+}
+
+/* Fine grain so large paper areas are never dead flat. */
+.pitchradar-app::before {
+  content: "";
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.038'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Lift content above the grain WITHOUT touching layout position — the side rail
+   is position:fixed and must stay that way. */
+.pitchradar-app > * {
+  z-index: 1;
+}
+
+.side-rail,
+.product-shell {
+  isolation: isolate;
+}
+
+/* ============================================================
+   2 · TYPOGRAPHY — the fonts now actually load (see fonts.css)
+   ============================================================ */
+
+body {
+  font-family: "DM Sans", "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "cv05" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.command-briefing h2,
+.booking-horizon-head h2,
+.decision-runway h2,
+.approval-rail h2,
+.agent-rail > header h2,
+.page-intro h2,
+.app-header h1,
+.agent-panel-head h2,
+.agent-welcome h3 {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -.018em;
+  font-feature-settings: "kern" 1, "liga" 1, "onum" 1;
+}
+
+/* The owner brief is the one true headline in the product. */
+.command-briefing h2 {
+  font-size: clamp(30px, 2.5vw, 45px);
+  line-height: 1.06;
+  letter-spacing: -.028em;
+  text-wrap: balance;
+}
+
+/* Numerals in metric positions get lining figures + optical tightening. */
+.operation-duration strong,
+.approval-summary strong,
+.workstream-strip strong,
+.page-facts span strong {
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -.02em;
+}
+
+.overline,
+.atlas-legend span,
+.runway-labels,
+.evidence-ledger-labels {
+  letter-spacing: .15em;
+}
+
+/* The owner threshold is the first thing the client ever sees, and it was the
+   one screen still set in Georgia — it never listed the brand serif, so
+   Newsreader was never even requested there. */
+.owner-threshold h1,
+.owner-threshold h2,
+.auth-form-heading {
+  font-family: "Newsreader", Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -.022em;
+}
+
+.auth-brand {
+  font-family: "Manrope", "DM Sans", sans-serif;
+}
+
+/* ============================================================
+   3 · SURFACES — boxes, borders, edges
+   ============================================================ */
+
+.command-briefing,
+.booking-horizon,
+.decision-runway,
+.approval-rail,
+.agent-rail,
+.workstream-strip,
+.booking-atlas,
+.evidence-ledger,
+.product-page > section,
+.deadline-brief {
+  border-color: var(--at-edge);
+  border-radius: var(--at-r-lg);
+  box-shadow: var(--at-lift-1), inset 0 1px 0 var(--at-rim);
+}
+
+/* The brief is the hero surface: warmer paper, deeper lift, a copper edge of light. */
+.command-briefing {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(130% 100% at 100% 0, rgba(166, 95, 63, .10), transparent 55%),
+    linear-gradient(168deg, #fffdfa 0%, #fdf8f2 100%);
+  box-shadow: var(--at-lift-2), inset 0 1px 0 var(--at-rim);
+}
+
+/* Hairline of copper along the top edge — the "instrument" signature. */
+.command-briefing::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(166, 95, 63, .55) 18%,
+    rgba(189, 145, 64, .75) 50%,
+    rgba(166, 95, 63, .55) 82%,
+    transparent 100%);
+}
+
+.workstream-strip {
+  overflow: hidden;
+  background: linear-gradient(180deg, #fffdfa, #fbf8f3);
+}
+
+.workstream-strip article {
+  position: relative;
+  border-right-color: var(--at-edge-soft);
+  transition: background 320ms var(--at-ease);
+}
+
+.workstream-strip article::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--at-copper), rgba(166, 95, 63, 0));
+  opacity: 0;
+  transform: scaleX(.2);
+  transform-origin: left;
+  transition: opacity 380ms var(--at-ease), transform 520ms var(--at-ease);
+}
+
+.workstream-strip article:hover {
+  background: rgba(255, 255, 255, .7);
+}
+
+.workstream-strip article:hover::after {
+  opacity: .9;
+  transform: scaleX(1);
+}
+
+/* Progress meters read as inlaid rules, not flat divs. */
+.workstream-strip div > i {
+  overflow: hidden;
+  background: rgba(38, 30, 24, .08);
+  border-radius: 99px;
+  box-shadow: inset 0 1px 2px rgba(38, 30, 24, .10);
+}
+
+.workstream-strip div > i b {
+  background: linear-gradient(90deg, var(--at-copper-deep), var(--at-copper-lit));
+  border-radius: 99px;
+  box-shadow: 0 0 10px rgba(166, 95, 63, .40);
+  transform-origin: left;
+  animation: at-meter 1100ms var(--at-ease-out) both;
+}
+
+@keyframes at-meter {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* Rows: the divider is the interface, so hover lights the row, not a border. */
+.runway-list article,
+.atlas-grid > article,
+.approval-items article,
+.coverage-weeks > article {
+  border-color: var(--at-edge-soft);
+  transition: background 260ms var(--at-ease), box-shadow 320ms var(--at-ease),
+    transform 320ms var(--at-ease);
+}
+
+.runway-list article:hover,
+.approval-items article:hover {
+  background: linear-gradient(90deg, rgba(166, 95, 63, .055), rgba(166, 95, 63, 0) 62%);
+}
+
+.runway-list article.is-leading {
+  background: linear-gradient(90deg, rgba(166, 95, 63, .085), rgba(255, 255, 255, 0) 58%);
+  box-shadow: inset 3px 0 0 var(--at-copper);
+}
+
+/* Live booking block — the confirmed operation should feel anchored and precious. */
+.current-booking {
+  position: relative;
+  background:
+    radial-gradient(120% 130% at 0 0, rgba(79, 120, 95, .10), transparent 58%),
+    linear-gradient(180deg, #fffdfa, #f9f6f0);
+  border-radius: var(--at-r);
+  box-shadow: var(--at-lift-0), inset 0 1px 0 var(--at-rim);
+}
+
+.operation-mark {
+  background: linear-gradient(150deg, #ffffff, #f4efe7);
+  border: 1px solid var(--at-edge);
+  border-radius: var(--at-r-sm);
+  box-shadow: var(--at-lift-0), inset 0 1px 0 #fff;
+}
+
+/* Dark tiles keep their weight but gain an inner rim so they read as inlay. */
+.approval-summary {
+  overflow: hidden;
+  border-color: rgba(20, 15, 11, .5);
+  border-radius: var(--at-r);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .07),
+    0 10px 26px rgba(20, 15, 11, .18);
+}
+
+.approval-summary span {
+  border-color: rgba(255, 255, 255, .09);
+}
+
+/* --- Contrast repairs, measured on the rendered product ---------------
+   These were real defects, not taste: command-centre.css loads after premium.css
+   and re-applied ink-coloured numerals inside the espresso approval tiles
+   (1.01:1 — invisible), and the light gold/faint greys never cleared 3:1 on
+   paper at 7-10px. Values below are chosen to stay inside the palette. */
+
+.approval-summary strong {
+  color: #fdf6ef;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+
+.approval-summary span:first-child strong {
+  color: #ffd9b8;
+}
+
+/* Gold reads as a highlight on ink, but needs to become bronze on paper. */
+.approval-items article strong,
+.approval-items article a,
+.approval-items article b {
+  color: #7d5a17;
+}
+
+.activity-stack .tone-amber b {
+  color: #7d5a17;
+}
+
+/* Micro-labels: 7-10px needs real contrast, not a whisper. */
+.runway-labels,
+.evidence-ledger-labels,
+.atlas-legend span,
+.workstream-strip small,
+.coverage-weeks small {
+  color: #6b7079;
+}
+
+/* ============================================================
+   4 · BUTTONS — one system, three ranks
+   ============================================================ */
+
+/* Rank 1 — copper. Gradient body, lit top edge, contact shadow that grows on hover. */
+.briefing-actions button:first-child,
+.primary-page-action,
+.approval-review-all,
+.app-header-tools .header-agent {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(180deg, var(--at-copper-lit), var(--at-copper) 52%, var(--at-copper-deep));
+  border: 1px solid var(--at-copper-deep);
+  border-radius: var(--at-r-sm);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .30),
+    inset 0 -1px 0 rgba(0, 0, 0, .14),
+    0 2px 5px rgba(127, 67, 45, .28),
+    0 8px 20px rgba(127, 67, 45, .22);
+  transition:
+    transform 220ms var(--at-ease),
+    box-shadow 260ms var(--at-ease),
+    filter 220ms var(--at-ease);
+}
+
+/* Sheen sweep on hover — the single most "premium" micro-moment in the product. */
+.briefing-actions button:first-child::before,
+.primary-page-action::before,
+.approval-review-all::before,
+.app-header-tools .header-agent::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .30), transparent);
+  transform: skewX(-18deg);
+  transition: left 720ms var(--at-ease);
+  pointer-events: none;
+}
+
+.briefing-actions button:first-child:hover,
+.primary-page-action:hover,
+.approval-review-all:hover,
+.app-header-tools .header-agent:hover {
+  transform: translateY(-1.5px);
+  filter: saturate(1.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .34),
+    inset 0 -1px 0 rgba(0, 0, 0, .14),
+    0 4px 10px rgba(127, 67, 45, .30),
+    0 16px 34px rgba(127, 67, 45, .28);
+}
+
+.briefing-actions button:first-child:hover::before,
+.primary-page-action:hover::before,
+.approval-review-all:hover::before,
+.app-header-tools .header-agent:hover::before {
+  left: 120%;
+}
+
+.briefing-actions button:first-child:active,
+.primary-page-action:active,
+.approval-review-all:active,
+.app-header-tools .header-agent:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, .22),
+    0 1px 3px rgba(127, 67, 45, .26);
+}
+
+/* Rank 2 — paper. Reads as a raised card, not an outlined rectangle. */
+.briefing-actions button,
+.app-header-tools .header-queue,
+.filter-cluster button,
+.deadline-brief > button,
+.evidence-ledger > button,
+.coverage-weeks article > button {
+  background: linear-gradient(180deg, #fffdfa, #f7f3ec);
+  border: 1px solid var(--at-edge);
+  border-radius: var(--at-r-sm);
+  box-shadow: var(--at-lift-0), inset 0 1px 0 var(--at-rim);
+  transition:
+    transform 220ms var(--at-ease),
+    box-shadow 260ms var(--at-ease),
+    border-color 260ms var(--at-ease),
+    background 260ms var(--at-ease);
+}
+
+.briefing-actions button:hover,
+.app-header-tools .header-queue:hover,
+.deadline-brief > button:hover,
+.evidence-ledger > button:hover,
+.coverage-weeks article > button:hover {
+  transform: translateY(-1.5px);
+  background: linear-gradient(180deg, #ffffff, #fbf7f1);
+  border-color: rgba(166, 95, 63, .34);
+  box-shadow: var(--at-lift-1), inset 0 1px 0 #fff;
+}
+
+.briefing-actions button:active,
+.app-header-tools .header-queue:active,
+.deadline-brief > button:active,
+.evidence-ledger > button:active {
+  transform: translateY(0);
+  box-shadow: inset 0 2px 6px rgba(38, 30, 24, .10);
+}
+
+.filter-cluster button.active {
+  background: linear-gradient(180deg, #2b2320, #1d1815);
+  border-color: #1d1815;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .10),
+    0 4px 12px rgba(20, 15, 11, .22);
+}
+
+/* Rank 3 — the navigation rail. Active state is a lit plate, not a fill. */
+.side-rail nav button {
+  border-radius: 10px;
+  transition:
+    background 240ms var(--at-ease),
+    color 240ms var(--at-ease),
+    transform 240ms var(--at-ease);
+}
+
+.side-rail nav button:hover {
+  transform: translateX(2px);
+}
+
+.side-rail nav button.active {
+  background:
+    linear-gradient(100deg, rgba(166, 95, 63, .30), rgba(166, 95, 63, .10));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .10),
+    inset 2px 0 0 var(--at-copper-lit),
+    0 6px 18px rgba(0, 0, 0, .22);
+}
+
+.ss-logo > span {
+  background: linear-gradient(150deg, var(--at-copper-lit), var(--at-copper-deep));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .26),
+    0 6px 16px rgba(127, 67, 45, .34);
+}
+
+/* Focus: a copper halo, never a browser outline. */
+button:focus-visible,
+a:focus-visible,
+textarea:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fffdf9,
+    0 0 0 4px rgba(166, 95, 63, .55);
+}
+
+/* ============================================================
+   5 · LIVE SIGNALS — the product should feel awake
+   ============================================================ */
+
+.status-beacon,
+.header-live i,
+.agent-state i,
+.lock-dot {
+  position: relative;
+  box-shadow: 0 0 0 0 rgba(79, 120, 95, .55);
+  animation: at-pulse 3.4s var(--at-ease-out) infinite;
+}
+
+@keyframes at-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(79, 120, 95, .50); }
+  60% { box-shadow: 0 0 0 7px rgba(79, 120, 95, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(79, 120, 95, 0); }
+}
+
+/* The agent orbit: a slow, quiet rotation — presence, not decoration. */
+.agent-orbit {
+  animation: at-orbit 14s linear infinite;
+}
+
+@keyframes at-orbit {
+  to { transform: rotate(360deg); }
+}
+
+.agent-core {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .22),
+    0 0 22px rgba(166, 95, 63, .30);
+}
+
+/* ============================================================
+   6 · ENTRANCE — one choreographed reveal, then stillness
+   ============================================================ */
+
+@keyframes at-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
+.command-briefing,
+.workstream-strip,
+.mission-primary > *,
+.mission-side > * {
+  animation: at-rise 720ms var(--at-ease-out) both;
+}
+
+.command-briefing { animation-delay: 40ms; }
+.workstream-strip { animation-delay: 110ms; }
+.mission-primary > *:nth-child(1) { animation-delay: 180ms; }
+.mission-primary > *:nth-child(2) { animation-delay: 240ms; }
+.mission-primary > *:nth-child(3) { animation-delay: 300ms; }
+.mission-side > *:nth-child(1) { animation-delay: 220ms; }
+.mission-side > *:nth-child(2) { animation-delay: 280ms; }
+.mission-side > *:nth-child(3) { animation-delay: 340ms; }
+
+.product-page > * {
+  animation: at-rise 640ms var(--at-ease-out) both;
+}
+
+.product-page > *:nth-child(1) { animation-delay: 40ms; }
+.product-page > *:nth-child(2) { animation-delay: 110ms; }
+.product-page > *:nth-child(3) { animation-delay: 175ms; }
+.product-page > *:nth-child(4) { animation-delay: 235ms; }
+
+/* ============================================================
+   7 · THE CHAT WORKSPACE — where the client will judge us
+   ============================================================ */
+
+.agent-backdrop {
+  background: rgba(20, 15, 11, .46);
+  backdrop-filter: blur(10px) saturate(1.1);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+}
+
+.agent-panel {
+  border-radius: var(--at-r-lg);
+  box-shadow: var(--at-lift-3);
+  transition:
+    transform 520ms var(--at-ease),
+    opacity 380ms var(--at-ease);
+}
+
+.agent-panel-head {
+  position: relative;
+  background:
+    radial-gradient(120% 200% at 88% 0, rgba(166, 95, 63, .30), transparent 60%),
+    linear-gradient(180deg, #241d19, #1a1512);
+}
+
+.agent-panel-head::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(192, 122, 85, .65), transparent);
+}
+
+.agent-mark {
+  background: linear-gradient(150deg, var(--at-copper-lit), var(--at-copper-deep));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .28),
+    0 8px 22px rgba(127, 67, 45, .42);
+}
+
+/* The panel gained a Chat/Memory bar (5 children) while the grid still declared
+   4 rows, which collapsed the bar to 17px under the conversation. Five rows,
+   conversation takes the flexible one. */
+.agent-panel {
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+}
+
+/* The bar shipped in a leftover blue-grey palette. Bring it into the atelier. */
+.agent-view-bar {
+  background: linear-gradient(180deg, #fffdfa, #faf6f0);
+  border-bottom-color: var(--at-edge);
+}
+
+.agent-view-bar > div {
+  background: rgba(38, 30, 24, .05);
+  border-color: var(--at-edge-soft);
+  border-radius: 11px;
+}
+
+.agent-view-bar > div button {
+  color: #7c716a;
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.agent-view-bar > div button.is-active {
+  color: #241d19;
+  background: #fffdfa;
+}
+
+.agent-new-chat {
+  color: #4b3f39;
+  background: linear-gradient(180deg, #fffdfa, #f7f3ec);
+  border-color: var(--at-edge);
+  font-family: "DM Sans", sans-serif;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.agent-new-chat:hover {
+  color: var(--at-copper-deep);
+  background: linear-gradient(180deg, #fff, #fbf7f1);
+  border-color: rgba(166, 95, 63, .40);
+}
+
+/* Messages arrive; they don't blink into place. */
+.agent-message {
+  animation: at-message 460ms var(--at-ease-out) both;
+}
+
+@keyframes at-message {
+  from { opacity: 0; transform: translateY(10px) scale(.994); }
+  to { opacity: 1; transform: none; }
+}
+
+/* The user bubble already carries the copper. Its "You" label is type, not a
+   chip — keep it flat and legible on that fill. */
+.agent-message.is-user .agent-message-meta span,
+.agent-message.is-user .agent-message-meta small {
+  color: rgba(255, 246, 238, .92);
+  background: none;
+  box-shadow: none;
+}
+
+.agent-message.is-user {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .18),
+    0 8px 22px rgba(127, 67, 45, .26);
+}
+
+.agent-receipt {
+  border-color: var(--at-edge);
+  border-radius: var(--at-r-sm);
+  background: linear-gradient(180deg, #fffdfa, #faf6f0);
+  box-shadow: var(--at-lift-0);
+  transition: transform 240ms var(--at-ease), box-shadow 260ms var(--at-ease);
+}
+
+a.agent-receipt:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--at-lift-1);
+}
+
+/* The thinking state carries the live tool activity — make it feel alive. */
+.agent-thinking {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--at-r-sm);
+}
+
+.agent-thinking::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg,
+    transparent 20%,
+    rgba(166, 95, 63, .10) 50%,
+    transparent 80%);
+  transform: translateX(-100%);
+  animation: at-shimmer 1900ms var(--at-ease-out) infinite;
+  pointer-events: none;
+}
+
+@keyframes at-shimmer {
+  to { transform: translateX(100%); }
+}
+
+.agent-thinking small.agent-activity {
+  animation: at-fade 320ms var(--at-ease-out);
+}
+
+@keyframes at-fade {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: none; }
+}
+
+.agent-welcome button,
+.agent-view-bar > div button,
+.agent-new-chat {
+  border-radius: var(--at-r-sm);
+  transition:
+    transform 220ms var(--at-ease),
+    box-shadow 240ms var(--at-ease),
+    background 240ms var(--at-ease),
+    border-color 240ms var(--at-ease);
+}
+
+.agent-welcome button:hover,
+.agent-new-chat:hover {
+  transform: translateY(-1.5px);
+  border-color: rgba(166, 95, 63, .40);
+  box-shadow: var(--at-lift-1);
+}
+
+.agent-view-bar > div button.is-active {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), var(--at-lift-0);
+}
+
+.memory-badge {
+  border-radius: 99px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+/* ============================================================
+   7b · SUB-PAGES — the same instrument, quieter
+   ============================================================ */
+
+.page-intro {
+  position: relative;
+}
+
+/* An editorial rule that starts copper and dissolves — ties every page header
+   back to the brief without repeating the full hero treatment. */
+.page-intro::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(166, 95, 63, .55), rgba(38, 30, 24, .08) 42%, transparent);
+}
+
+.page-facts span {
+  background: linear-gradient(180deg, #fffdfa, #f8f4ee);
+  border: 1px solid var(--at-edge-soft);
+  border-radius: var(--at-r-sm);
+  box-shadow: var(--at-lift-0), inset 0 1px 0 var(--at-rim);
+}
+
+.atlas-grid > article {
+  border-radius: var(--at-r-sm);
+  transition: transform 300ms var(--at-ease), box-shadow 320ms var(--at-ease);
+}
+
+.atlas-grid > article:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--at-lift-1);
+}
+
+.atlas-event {
+  border-radius: 8px;
+  transition: transform 240ms var(--at-ease), box-shadow 260ms var(--at-ease);
+}
+
+.atlas-event:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--at-lift-0);
+}
+
+.atlas-booking {
+  background:
+    linear-gradient(135deg, rgba(79, 120, 95, .16), rgba(79, 120, 95, .06)),
+    #fffdfa;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 var(--at-rim);
+}
+
+/* Deadline chips: urgency should read at a glance without shouting. */
+.deadline-brief button span,
+.evidence-bars i.on {
+  border-radius: 99px;
+}
+
+.evidence-bars i.on {
+  background: linear-gradient(90deg, var(--at-copper-deep), var(--at-copper-lit));
+}
+
+/* ============================================================
+   8 · MOTION CONSENT
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .pitchradar-app *,
+  .pitchradar-app *::before,
+  .pitchradar-app *::after,
+  .agent-panel *,
+  .agent-panel *::before,
+  .agent-panel *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ============================================================
+   9 · TOUCH + SMALL SCREENS
+   Hover lift is a pointer affordance; on touch it just causes jitter.
+   ============================================================ */
+
+@media (hover: none) {
+  .briefing-actions button:hover,
+  .primary-page-action:hover,
+  .app-header-tools .header-queue:hover,
+  .app-header-tools .header-agent:hover,
+  .agent-welcome button:hover,
+  .agent-new-chat:hover,
+  .deadline-brief > button:hover,
+  .evidence-ledger > button:hover,
+  .coverage-weeks article > button:hover,
+  .side-rail nav button:hover {
+    transform: none;
+  }
+}
+
+/* The live-operation card on mobile is copper; its subtitle inherited a slate
+   grey (1.13:1 on that fill). Warm porcelain instead. */
+.mobile-live p,
+.mobile-live p span {
+  color: rgba(255, 246, 238, .88);
+}
+
+.mobile-live strong {
+  color: #fff;
+}
+
+/* Mobile surfaces get the same depth language as desktop. */
+.mobile-horizon,
+.mobile-decision,
+.mobile-sheet {
+  border-radius: var(--at-r-lg);
+  box-shadow: var(--at-lift-2);
+}
+
+.mobile-live {
+  border-radius: var(--at-r);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .22),
+    0 10px 26px rgba(127, 67, 45, .34);
+}
+
+.mobile-nav {
+  box-shadow: 0 -8px 30px rgba(20, 15, 11, .28);
+}
+
+.mobile-nav button.active,
+.mobile-nav button[aria-current="page"] {
+  position: relative;
+}
+
+@media (max-width: 860px) {
+  /* Entrance stagger is desktop choreography; phones should feel instant. */
+  .command-briefing,
+  .workstream-strip,
+  .mission-primary > *,
+  .mission-side > *,
+  .product-page > * {
+    animation-delay: 0ms !important;
+    animation-duration: 420ms !important;
+  }
+
+  .command-briefing,
+  .booking-horizon,
+  .decision-runway,
+  .approval-rail,
+  .agent-rail,
+  .workstream-strip,
+  .booking-atlas,
+  .evidence-ledger,
+  .deadline-brief {
+    border-radius: var(--at-r);
+  }
+}

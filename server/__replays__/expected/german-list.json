@@ -1,0 +1,25 @@
+{
+  "replay": "german-list",
+  "family": "german-list",
+  "file": "german-list.html",
+  "count": 1,
+  "occurrences": [
+    {
+      "sourceRecordKey": "brandenburg-events:2026-09-07:wanderausstellung-in-cottbus",
+      "rawName": "Wanderausstellung in Cottbus",
+      "rawLocation": "Cottbus",
+      "rawStartsAt": "2026-09-07",
+      "rawEndsAt": "2026-10-01",
+      "rawPayload": {
+        "extraction": "german_list",
+        "city": "Cottbus",
+        "cityEvidence": "postal_address",
+        "startsOn": "2026-09-07",
+        "endsOn": "2026-10-01",
+        "matchedDateText": "07.09.2026 bis 01.10.2026",
+        "eventUrl": "https://efre.brandenburg.de/"
+      },
+      "contentHash": "7c04209b02d3ec9101790692155c2c442a91a2940679020be3490d47964cd1be"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+.git
+.gitignore
+.pitchradar-runtime
+.env
+.env.*
+!.env.example
+dist
+node_modules
+*.tsbuildinfo
+npm-debug.log*
+

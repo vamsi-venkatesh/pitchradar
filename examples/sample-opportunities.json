@@ -1,0 +1,739 @@
+{
+  "demoData": true,
+  "notice": "Demo data. Every organizer, event, contact and domain below is invented for this public repository. These records are the committed fixture catalogue scored by the product's own ranking, not a hand-written illustration of it.",
+  "schema": "EventOpportunity[] (src/types.ts), as produced by rankOpportunities (src/ranking.ts)",
+  "generatedFrom": {
+    "catalogueMode": "fixtures",
+    "now": "2026-07-27T07:00:00.000Z",
+    "count": 12
+  },
+  "opportunities": [
+    {
+      "id": "weihnachtsrodeo-berlin-2026",
+      "name": "Weihnachtsrodeo 2026",
+      "city": "Berlin",
+      "state": "Berlin",
+      "startsAt": "2026-12-12T12:00:00+01:00",
+      "endsAt": "2026-12-13T20:00:00+01:00",
+      "eventType": "christmas",
+      "verification": "verified",
+      "applicationState": "open",
+      "applicationUrl": "https://www.example-weihnachtsrodeo.de/bewerbung",
+      "application": {
+        "route": "public_form",
+        "capacityState": "unknown",
+        "lastCheckedAt": "2026-07-27T09:00:00+02:00",
+        "nextCheckAt": "2026-07-28T09:00:00+02:00",
+        "routeOwner": "Weihnachtsrodeo",
+        "note": "The public food application is live. Remaining category capacity and the deadline are not published."
+      },
+      "organizer": "Weihnachtsrodeo",
+      "infrastructure": {},
+      "fitSignals": [
+        "An official food-vendor application is available",
+        "Street food is explicitly part of the event concept",
+        "The weekend matches the normal operating window",
+        "Berlin is within the preferred regional focus"
+      ],
+      "riskSignals": [
+        "Pitch fee and technical requirements have not been confirmed"
+      ],
+      "missingFields": [
+        "Application deadline",
+        "Pitch fee",
+        "Power",
+        "Water",
+        "Pitch footprint"
+      ],
+      "sources": [
+        {
+          "label": "Food-vendor application and event facts",
+          "url": "https://www.example-weihnachtsrodeo.de/bewerbung",
+          "publisher": "Weihnachtsrodeo",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "dates",
+            "hours",
+            "location",
+            "food_application",
+            "event_concept"
+          ]
+        }
+      ],
+      "pipeline": "owner_review",
+      "vendorRelevance": "relevant",
+      "score": 74,
+      "tier": "A",
+      "scoreBreakdown": {
+        "EventTypeFit": 22,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 7,
+        "ApplicationWindow": 10,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "hockenheim-street-food-2026",
+      "name": "Street Food Festival Hockenheim",
+      "city": "Hockenheim",
+      "state": "Baden-Württemberg",
+      "startsAt": "2026-08-07T16:00:00+02:00",
+      "endsAt": "2026-08-09T20:00:00+02:00",
+      "eventType": "street_food",
+      "verification": "verified",
+      "applicationState": "unknown",
+      "organizer": "Muster Events GmbH",
+      "application": {
+        "route": "email",
+        "capacityState": "unknown",
+        "lastCheckedAt": "2026-07-27T09:00:00+02:00",
+        "nextCheckAt": "2026-07-28T09:00:00+02:00",
+        "routeOwner": "Muster Events GmbH",
+        "note": "The organizer and event are verified, but there is no public proof that a speciality pitch remains."
+      },
+      "infrastructure": {},
+      "fitSignals": [
+        "Established street-food tour with curated food stalls",
+        "Friday through Sunday matches the normal operating window"
+      ],
+      "riskSignals": [
+        "Very short notice",
+        "Travel and vendor availability still need verification"
+      ],
+      "missingFields": [
+        "Vendor place available?",
+        "Application deadline",
+        "Travel from exact postcode",
+        "Fee",
+        "Infrastructure"
+      ],
+      "sources": [
+        {
+          "label": "Official 2026 festival tour",
+          "url": "https://www.example-muster-events.de/",
+          "publisher": "Muster Events GmbH",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "dates",
+            "city",
+            "event_type",
+            "organizer",
+            "curated_food_stands"
+          ]
+        }
+      ],
+      "pipeline": "verifying",
+      "vendorRelevance": "relevant",
+      "score": 71,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 30,
+        "CalendarFit": 20,
+        "RegionFit": 8,
+        "TradingDuration": 10,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": -2
+      }
+    },
+    {
+      "id": "stadtfest-eisenhuettenstadt-2026",
+      "name": "Stadtfest Eisenhüttenstadt",
+      "city": "Eisenhüttenstadt",
+      "state": "Brandenburg",
+      "startsAt": "2026-08-28T11:00:00+02:00",
+      "endsAt": "2026-08-30T20:00:00+02:00",
+      "eventType": "city_festival",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "An official state source confirms the date and central festival area",
+        "Friday matches the normal operating window",
+        "Located in Brandenburg"
+      ],
+      "riskSignals": [
+        "The exact event end date still needs verification",
+        "No vendor application has been found"
+      ],
+      "missingFields": [
+        "Organizer",
+        "End date",
+        "Application route",
+        "Pitch fee",
+        "Infrastructure"
+      ],
+      "sources": [
+        {
+          "label": "Brandenburg will Dich tour schedule",
+          "url": "https://esf.brandenburg.de/esf/de/ansicht/~22-06-2026-brandaktuell-brandenburg-will-dich",
+          "publisher": "Land Brandenburg",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "date",
+            "city",
+            "venue_area"
+          ]
+        }
+      ],
+      "pipeline": "verifying",
+      "vendorRelevance": "relevant",
+      "score": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 10,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "schwedter-oktoberfest-2026",
+      "name": "Schwedter Oktoberfest",
+      "city": "Schwedt/Oder",
+      "state": "Brandenburg",
+      "startsAt": "2026-09-25T00:00:00+02:00",
+      "endsAt": "2026-09-27T23:59:00+02:00",
+      "eventType": "city_festival",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "Three-day recurring city event confirmed by the official calendar",
+        "Friday through Sunday matches the preferred operating window",
+        "Regional Brandenburg opportunity"
+      ],
+      "riskSignals": [
+        "Food-vendor availability and application route remain unverified"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Application route",
+        "Pitch fee",
+        "Visitor evidence",
+        "Infrastructure"
+      ],
+      "sources": [
+        {
+          "label": "Official Schwedt annual events calendar",
+          "url": "https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787",
+          "publisher": "Stadt Schwedt/Oder",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "dates",
+            "city",
+            "recurring_event"
+          ]
+        }
+      ],
+      "pipeline": "verifying",
+      "vendorRelevance": "relevant",
+      "score": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 10,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "kranichtage-weekend-one-2026",
+      "name": "21. Kranichtage · Weekend 1",
+      "city": "Lower Oder Valley",
+      "state": "Brandenburg",
+      "startsAt": "2026-10-02T00:00:00+02:00",
+      "endsAt": "2026-10-04T23:59:00+02:00",
+      "eventType": "market",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "Three-day regional event window confirmed by the official city calendar",
+        "Friday through Sunday matches the preferred operating window"
+      ],
+      "riskSignals": [
+        "Food-vendor demand and the precise venue are not confirmed",
+        "Vendor relevance unverified: no market or food signal in the recorded event text"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Food vendors wanted?",
+        "Venue",
+        "Fee",
+        "Infrastructure"
+      ],
+      "sources": [
+        {
+          "label": "Official Schwedt annual events calendar",
+          "url": "https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787",
+          "publisher": "Stadt Schwedt/Oder",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "dates",
+            "region"
+          ]
+        }
+      ],
+      "pipeline": "discovered",
+      "vendorRelevance": "unclear",
+      "score": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 24,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 10,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": -6
+      }
+    },
+    {
+      "id": "kranichtage-weekend-two-2026",
+      "name": "21. Kranichtage · Weekend 2",
+      "city": "Lower Oder Valley",
+      "state": "Brandenburg",
+      "startsAt": "2026-10-09T00:00:00+02:00",
+      "endsAt": "2026-10-11T23:59:00+02:00",
+      "eventType": "market",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "A second three-day regional event window is confirmed",
+        "Friday through Sunday matches the preferred operating window"
+      ],
+      "riskSignals": [
+        "Food-vendor demand and the precise venue are not confirmed",
+        "Vendor relevance unverified: no market or food signal in the recorded event text"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Food vendors wanted?",
+        "Venue",
+        "Fee",
+        "Infrastructure"
+      ],
+      "sources": [
+        {
+          "label": "Official Schwedt annual events calendar",
+          "url": "https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787",
+          "publisher": "Stadt Schwedt/Oder",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "dates",
+            "region"
+          ]
+        }
+      ],
+      "pipeline": "discovered",
+      "vendorRelevance": "unclear",
+      "score": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 24,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 10,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": -6
+      }
+    },
+    {
+      "id": "norder-sommerfest-2026",
+      "name": "Norder Sommerfest",
+      "city": "Norden",
+      "state": "Lower Saxony",
+      "startsAt": "2026-08-28T12:00:00+02:00",
+      "endsAt": "2026-08-30T20:00:00+02:00",
+      "eventType": "city_festival",
+      "verification": "verified",
+      "applicationState": "open",
+      "applicationUrl": "https://www.norden.de/Stadtleben/Kultur-Freizeit/M%C3%A4rkte-Feste/Norder-Sommerfest/Norder-Sommerfest-2026-Bewerbungsphase-gestartet.php?FID=3170.51782.1&La=1&ModID=7&NavID=3170.108&object=tx%2C3170.5",
+      "organizer": "Stadt Norden",
+      "application": {
+        "route": "public_form",
+        "capacityState": "rolling",
+        "lastCheckedAt": "2026-07-27T09:00:00+02:00",
+        "nextCheckAt": "2026-07-28T09:00:00+02:00",
+        "routeOwner": "Stadt Norden",
+        "note": "The city states that food and market stand applications are planned continuously with no fixed deadline."
+      },
+      "infrastructure": {},
+      "fitSignals": [
+        "Three-day Friday–Sunday city festival",
+        "The official city page explicitly accepts food-stand applications",
+        "Rolling planning means a late opportunity may still exist"
+      ],
+      "riskSignals": [
+        "Remaining speciality/category capacity is not published",
+        "Travel requires the exact home postcode"
+      ],
+      "missingFields": [
+        "Speciality pitch available?",
+        "Pitch fee",
+        "Power",
+        "Water",
+        "Expected attendance"
+      ],
+      "sources": [
+        {
+          "label": "Official rolling food-stand application",
+          "url": "https://www.norden.de/Stadtleben/Kultur-Freizeit/M%C3%A4rkte-Feste/Norder-Sommerfest/Norder-Sommerfest-2026-Bewerbungsphase-gestartet.php?FID=3170.51782.1&La=1&ModID=7&NavID=3170.108&object=tx%2C3170.5",
+          "publisher": "Stadt Norden",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "dates",
+            "organizer",
+            "food_application",
+            "rolling_application"
+          ]
+        }
+      ],
+      "pipeline": "owner_review",
+      "vendorRelevance": "relevant",
+      "score": 66,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 8,
+        "TradingDuration": 10,
+        "ApplicationWindow": 10,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "stadtfest-dessau-2027",
+      "name": "Stadtfest Dessau 2027",
+      "city": "Dessau-Roßlau",
+      "state": "Saxony-Anhalt",
+      "startsAt": "2027-07-02T17:00:00+02:00",
+      "endsAt": "2027-07-04T18:00:00+02:00",
+      "eventType": "city_festival",
+      "verification": "verified",
+      "applicationState": "open",
+      "applicationDeadline": "2027-03-31",
+      "applicationUrl": "https://www.example-dessfest.de/bewerbung/",
+      "organizer": "Stadtmarketinggesellschaft Dessau-Roßlau mbH",
+      "contactEmail": "bewerbung@example-stadtfest.de",
+      "contactPhone": "+49 30 0000004",
+      "application": {
+        "route": "public_form",
+        "capacityState": "available",
+        "deadline": "2027-03-31",
+        "lastCheckedAt": "2026-07-27T09:00:00+02:00",
+        "nextCheckAt": "2026-11-02T09:00:00+01:00",
+        "routeOwner": "Stadtmarketinggesellschaft Dessau-Roßlau mbH",
+        "note": "The official 2027 gastronomy application and deadline are already public."
+      },
+      "infrastructure": {},
+      "fitSignals": [
+        "Three-day Friday–Sunday event near the home region",
+        "Official Food-Meile and open 2027 gastronomy application",
+        "Long preparation runway"
+      ],
+      "riskSignals": [
+        "Pitch economics and category exclusivity are not published"
+      ],
+      "missingFields": [
+        "Pitch fee",
+        "Speciality/category availability",
+        "Power and water",
+        "Expected visitors"
+      ],
+      "sources": [
+        {
+          "label": "Official 2027 event page",
+          "url": "https://www.example-dessfest.de/",
+          "publisher": "Stadtmarketinggesellschaft Dessau-Roßlau mbH",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "2027_dates",
+            "food_mile",
+            "organizer",
+            "contact"
+          ]
+        },
+        {
+          "label": "Official 2027 gastronomy application",
+          "url": "https://www.example-dessfest.de/bewerbung/",
+          "publisher": "Stadtmarketinggesellschaft Dessau-Roßlau mbH",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "application_open",
+            "deadline",
+            "application_route"
+          ]
+        }
+      ],
+      "pipeline": "owner_review",
+      "vendorRelevance": "relevant",
+      "score": 66,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 8,
+        "TradingDuration": 10,
+        "ApplicationWindow": 10,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "brueckenfest-criewen-2026",
+      "name": "Brückenfest Criewen",
+      "city": "Schwedt/Oder",
+      "state": "Brandenburg",
+      "startsAt": "2026-08-01T00:00:00+02:00",
+      "endsAt": "2026-08-01T23:59:00+02:00",
+      "eventType": "city_festival",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "Official city calendar confirms the local festival date",
+        "Regional Brandenburg opportunity",
+        "Saturday matches the operating window"
+      ],
+      "riskSignals": [
+        "No public food-vendor application has been found",
+        "Opening hours remain unknown"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Food vendors wanted?",
+        "Opening hours",
+        "Pitch fee"
+      ],
+      "sources": [
+        {
+          "label": "Official Schwedt annual events calendar",
+          "url": "https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787",
+          "publisher": "Stadt Schwedt/Oder",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "date",
+            "city"
+          ]
+        }
+      ],
+      "pipeline": "discovered",
+      "vendorRelevance": "relevant",
+      "score": 62,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 4,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "industriekultur-vierraden-2026",
+      "name": "Tag der Industriekultur",
+      "city": "Vierraden",
+      "state": "Brandenburg",
+      "startsAt": "2026-08-08T00:00:00+02:00",
+      "endsAt": "2026-08-08T23:59:00+02:00",
+      "eventType": "market",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "Official city calendar confirms the event",
+        "Saturday and regional location fit the operating profile"
+      ],
+      "riskSignals": [
+        "Food-vendor demand and visitor scale are unknown",
+        "Vendor relevance unverified: no market or food signal in the recorded event text"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Food vendors wanted?",
+        "Visitor evidence",
+        "Hours",
+        "Fee"
+      ],
+      "sources": [
+        {
+          "label": "Official Schwedt annual events calendar",
+          "url": "https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787",
+          "publisher": "Stadt Schwedt/Oder",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "date",
+            "city"
+          ]
+        }
+      ],
+      "pipeline": "discovered",
+      "vendorRelevance": "unclear",
+      "score": 62,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 24,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 4,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": -6
+      }
+    },
+    {
+      "id": "tabakbluetenfest-vierraden-2026",
+      "name": "31. Tabakblütenfest",
+      "city": "Vierraden",
+      "state": "Brandenburg",
+      "startsAt": "2026-08-15T00:00:00+02:00",
+      "endsAt": "2026-08-15T23:59:00+02:00",
+      "eventType": "city_festival",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "Established local festival confirmed by the official city calendar",
+        "Saturday and regional location fit the operating profile"
+      ],
+      "riskSignals": [
+        "Food-vendor application and attendance evidence are unknown"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Application route",
+        "Visitor evidence",
+        "Pitch fee",
+        "Infrastructure"
+      ],
+      "sources": [
+        {
+          "label": "Official Schwedt annual events calendar",
+          "url": "https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787",
+          "publisher": "Stadt Schwedt/Oder",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "date",
+            "city",
+            "recurring_event"
+          ]
+        }
+      ],
+      "pipeline": "discovered",
+      "vendorRelevance": "relevant",
+      "score": 62,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 4,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    },
+    {
+      "id": "stadtfest-rathenow-2026",
+      "name": "Stadtfest Rathenow",
+      "city": "Rathenow",
+      "state": "Brandenburg",
+      "startsAt": "2026-09-06T11:00:00+02:00",
+      "endsAt": "2026-09-06T18:00:00+02:00",
+      "eventType": "city_festival",
+      "verification": "partial",
+      "applicationState": "unknown",
+      "infrastructure": {},
+      "fitSignals": [
+        "An official state source confirms a city festival with multiple stalls",
+        "Regional opportunity within Brandenburg",
+        "Sunday matches the normal operating window"
+      ],
+      "riskSignals": [
+        "No public vendor application was found on the checked source"
+      ],
+      "missingFields": [
+        "Organizer contact",
+        "Application route",
+        "Pitch fee",
+        "Power",
+        "Water"
+      ],
+      "sources": [
+        {
+          "label": "Official Brandenburg event listing",
+          "url": "https://efre.brandenburg.de/efre/de/aktuelles/veranstaltungen/",
+          "publisher": "Land Brandenburg",
+          "official": true,
+          "observedAt": "2026-07-27T09:00:00+02:00",
+          "supports": [
+            "event_name",
+            "date",
+            "hours",
+            "city",
+            "stands_present"
+          ]
+        }
+      ],
+      "pipeline": "verifying",
+      "vendorRelevance": "relevant",
+      "score": 62,
+      "tier": "B",
+      "scoreBreakdown": {
+        "EventTypeFit": 18,
+        "CalendarFit": 20,
+        "RegionFit": 15,
+        "TradingDuration": 4,
+        "ApplicationWindow": 5,
+        "DemandEvidence": 0,
+        "EconomicsEvidence": 0,
+        "Deductions": 0
+      }
+    }
+  ]
+}

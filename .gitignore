@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.pitchradar-runtime/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+_qa/
+# Generated weekly reports stay local; the committed sample under reports/sample/ does not.
+reports/*
+!reports/sample/
+
+# The sample's manifest stamps the commit it was generated from. This repository
+# is published as ONE amended commit, so that sha changes every time the tree
+# does and a committed stamp would name a commit that no longer exists. The
+# manifest is generated locally by `npm run report` and deliberately not carried.
+reports/sample/**/manifest.json

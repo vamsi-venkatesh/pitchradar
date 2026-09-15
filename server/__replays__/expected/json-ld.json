@@ -1,0 +1,85 @@
+{
+  "replay": "json-ld",
+  "family": "json-ld",
+  "file": "json-ld.html",
+  "count": 4,
+  "occurrences": [
+    {
+      "sourceRecordKey": "https://example.test/fest/1",
+      "rawName": "Havelfest Rathenow",
+      "rawLocation": "Marktplatz, Rathenow, 14712",
+      "rawStartsAt": "2026-08-14",
+      "rawEndsAt": "2026-08-16",
+      "rawPayload": {
+        "extraction": "json_ld",
+        "schemaTypes": [
+          "Festival"
+        ],
+        "startsOn": "2026-08-14",
+        "endsOn": "2026-08-16",
+        "city": "Rathenow",
+        "postalCode": "14712",
+        "federalStateHint": "Brandenburg",
+        "street": "Berliner Str. 15",
+        "country": "DE",
+        "eventUrl": "https://example.test/fest/1",
+        "routeOwner": "Stadt Rathenow",
+        "offers": [
+          {
+            "price": "0",
+            "priceCurrency": "EUR"
+          }
+        ]
+      },
+      "contentHash": "3a8ba85a46c21e85de13d4d923ee267a62c25c136926665514157e644e572748"
+    },
+    {
+      "sourceRecordKey": "Street Food Festival Strausberg|2026-08-14T16:00:00",
+      "rawName": "Street Food Festival Strausberg",
+      "rawLocation": "Kulturpark, 15344 Strausberg",
+      "rawStartsAt": "2026-08-14T16:00:00",
+      "rawEndsAt": "2026-08-14",
+      "rawPayload": {
+        "extraction": "json_ld",
+        "schemaTypes": [
+          "FoodEvent"
+        ],
+        "startsOn": "2026-08-14",
+        "endsOn": "2026-08-14",
+        "city": "Strausberg"
+      },
+      "contentHash": "3e564a3bffef07e95d381c08e80f2fb48e71b73308e37de69b0a09afad253b99"
+    },
+    {
+      "sourceRecordKey": "Seezauber|2026-09-05",
+      "rawName": "Seezauber",
+      "rawStartsAt": "2026-09-05",
+      "rawEndsAt": "2026-09-06",
+      "rawPayload": {
+        "extraction": "json_ld",
+        "schemaTypes": [
+          "Event",
+          "MusicEvent"
+        ],
+        "startsOn": "2026-09-05",
+        "endsOn": "2026-09-06"
+      },
+      "contentHash": "9b6fdf0c422a247a224b85973c84c4ce3ee69414d6729d9e7915680321719e40"
+    },
+    {
+      "sourceRecordKey": "Street Food & Music Festival Düsseldorf|2026-10-02",
+      "rawName": "Street Food & Music Festival Düsseldorf",
+      "rawStartsAt": "2026-10-02",
+      "rawEndsAt": "2026-10-04",
+      "rawPayload": {
+        "extraction": "json_ld",
+        "schemaTypes": [
+          "Event"
+        ],
+        "startsOn": "2026-10-02",
+        "endsOn": "2026-10-04"
+      },
+      "contentHash": "acf5dd88b984bda2312913251e6311f7a901eeb9ce97d9ed1b918482c425ccdc"
+    }
+  ]
+}

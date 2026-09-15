@@ -1,0 +1,26 @@
+{
+  "replay": "haendler-portal",
+  "family": "haendler-portal",
+  "file": "haendler-portal.html",
+  "count": 1,
+  "occurrences": [
+    {
+      "sourceRecordKey": "haendler-portal:2027-06-18:tag-der-sachsen-2027-plauen",
+      "rawName": "Tag der Sachsen 2027 - Plauen",
+      "rawLocation": "Plauen",
+      "rawStartsAt": "2027-06-18",
+      "rawEndsAt": "2027-06-20",
+      "rawPayload": {
+        "eventUrl": "https://www.example-haendler-portal.de/portal/home/",
+        "applicationUrl": "https://www.example-haendler-portal.de/portal/home/",
+        "applicationDeadline": "2026-12-31",
+        "routeOwner": "Agentur Beispiel Händlerportal",
+        "eventType": "city_festival",
+        "city": "Plauen",
+        "startsOn": "2027-06-18",
+        "endsOn": "2027-06-20"
+      },
+      "contentHash": "fe33d22f3daabe26dd98d9ab846618f9436f41d068d3842695be69e9ea5e36cc"
+    }
+  ]
+}

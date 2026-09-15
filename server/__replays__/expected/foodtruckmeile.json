@@ -1,0 +1,26 @@
+{
+  "replay": "foodtruckmeile",
+  "family": "foodtruckmeile",
+  "file": "foodtruckmeile.html",
+  "count": 1,
+  "occurrences": [
+    {
+      "sourceRecordKey": "https://example-foodtruckmeile.de/darmstadt",
+      "rawName": "Foodtruckmeile Darmstadt",
+      "rawLocation": "Darmstadt",
+      "rawStartsAt": "2026-07-17",
+      "rawEndsAt": "2026-07-19",
+      "rawPayload": {
+        "venue": "Karolinenplatz",
+        "eventUrl": "https://example-foodtruckmeile.de/darmstadt",
+        "applicationUrl": "https://example-foodtruckmeile.de/dirketbewerbung",
+        "routeOwner": "Beispiel Kulinarik GmbH",
+        "eventType": "street_food",
+        "city": "Darmstadt",
+        "startsOn": "2026-07-17",
+        "endsOn": "2026-07-19"
+      },
+      "contentHash": "4677b9e641a9ca9d9f3bfb122c5b8939424ae0f9a6651d066eced957da7e728a"
+    }
+  ]
+}

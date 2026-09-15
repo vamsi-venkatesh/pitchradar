@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "id": 2078,
+      "title": "Food Truck Festival Oberasbach 2026",
+      "url": "https://events.example.test/event/2078",
+      "start_date": "2026-08-01 12:00:00",
+      "end_date": "2026-08-02 19:00:00",
+      "venue": {
+        "venue": "Rathausplatz Oberasbach",
+        "city": "Oberasbach",
+        "zip": "90522"
+      }
+    }
+  ]
+}

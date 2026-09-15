@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PitchRadar — Weekly Opportunity Brief 2026-W31</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #f4f2ed;
+  color: #1c1d1a;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  font-size: 10pt;
+  line-height: 1.45;
+}
+.sheet { max-width: 210mm; margin: 0 auto; background: #fffdf8; padding: 16mm 16mm; overflow-wrap: break-word; }
+h1, h2, h3, h4 { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0 0 0.55em; }
+a { color: #2f4f3f; text-decoration: none; border-bottom: 1px solid rgba(47, 79, 63, 0.35); overflow-wrap: anywhere; }
+td, th, li, p { overflow-wrap: break-word; }
+table { max-width: 100%; }
+.masthead { border-bottom: 2px solid #1c1d1a; padding-bottom: 9px; margin-bottom: 14px; }
+.masthead .wordmark { font-size: 21pt; letter-spacing: -0.02em; }
+.masthead .tagline { font-size: 8.5pt; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6a63; margin-top: 3px; }
+.masthead .meta { display: flex; flex-wrap: wrap; gap: 5px 22px; margin-top: 10px; font-size: 8pt; color: #4a4a44; }
+.masthead .meta span strong { display: block; font-size: 7pt; letter-spacing: 0.12em; text-transform: uppercase; color: #8c8b82; font-weight: 600; }
+.masthead .profile { font-size: 8.5pt; color: #43433d; margin-top: 8px; }
+section { margin: 0 0 16px; }
+section > h2 {
+  font-size: 8.5pt; letter-spacing: 0.18em; text-transform: uppercase; color: #8c8b82;
+  border-bottom: 1px solid #ddd9cf; padding-bottom: 4px; margin-bottom: 9px;
+}
+.lede { font-size: 9pt; color: #43433d; margin-bottom: 0.7em; }
+.empty { font-size: 9pt; color: #6b6a63; font-style: italic; }
+
+/* KPI row — equal fractions, so a long number can never widen the page. */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #e6e2d8; border: 1px solid #e6e2d8; margin-bottom: 9px; }
+.kpis .cell { background: #fffefb; padding: 5px 7px; min-width: 0; }
+.kpis .k { display: block; font-size: 6.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #8c8b82; overflow-wrap: anywhere; }
+.kpis .v { display: block; font-size: 14pt; font-variant-numeric: tabular-nums; }
+.summary { font-size: 9.5pt; border-left: 3px solid #1c1d1a; padding-left: 9px; margin-bottom: 4px; }
+
+/* Action and opportunity cards. On screen the group is a plain block — the
+   cards stack down the page at full width, exactly as before. The wrapper
+   exists so that PAPER can flow the same cards into two columns without a
+   single word of the brief changing. */
+.cards { display: block; }
+.card { border: 1px solid #e2ded3; background: #fffefb; padding: 9px 11px; margin-bottom: 7px; break-inside: avoid; }
+.card.urgent { border-left: 4px solid #8a2f2f; }
+.card.soon { border-left: 4px solid #8a6a2f; }
+.card.watch { border-left: 4px solid #b3ada0; }
+.card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.card-head h3 { font-size: 11.5pt; }
+.card-head .badge { font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #43433d; border: 1px solid #1c1d1a; padding: 0 4px; }
+.card-head .badge.urgent { background: #f6e6e6; }
+.card-head .badge.soon { background: #f6f0e2; }
+.sub { font-size: 8.5pt; color: #6b6a63; margin-top: 2px; }
+.verdict { font-size: 9pt; margin: 5px 0 3px; letter-spacing: 0.02em; }
+.verdict strong { letter-spacing: 0.06em; }
+.facts { margin: 4px 0 0; padding: 0; list-style: none; font-size: 8.5pt; }
+.facts > li { padding: 2px 0; border-top: 1px dotted #e6e2d8; overflow-wrap: anywhere; }
+.facts > li:first-child { border-top: 0; }
+.facts .k { display: inline-block; min-width: 96px; padding-right: 8px; vertical-align: top; font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #8c8b82; }
+.why { margin: 4px 0 0; padding-left: 15px; font-size: 8.5pt; }
+.why li { margin-bottom: 1px; }
+.next { margin-top: 5px; font-size: 9pt; border-top: 1px solid #e6e2d8; padding-top: 4px; }
+.next .label { font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #8c8b82; margin-right: 6px; }
+.missing { color: #8a5a2b; }
+/* The cause is never allowed to be louder than the level it explains. */
+.verdict .cause { font-weight: 400; letter-spacing: 0; color: #4a4a44; overflow-wrap: anywhere; }
+/* A route may carry an email, a phone and a long portal URL. It wraps rather
+   than pushing the A4 column open — the href stays the full address. */
+.route { display: inline; overflow-wrap: anywhere; word-break: break-word; }
+.src { display: block; margin-top: 1px; font-size: 7pt; color: #8c8b82; overflow-wrap: anywhere; }
+.src a { color: #6a6a62; }
+.tag {
+  font-size: 7pt; letter-spacing: 0.04em; text-transform: uppercase; color: #8a6a2f;
+  border: 0.5pt solid #d8c69a; border-radius: 2pt; padding: 0 3pt;
+}
+
+/* Compact tables. Fixed layout + declared fractions + breakable cells. */
+.grid { width: 100%; table-layout: fixed; border-collapse: collapse; font-size: 8pt; }
+.grid th, .grid td { border-bottom: 1px solid #e6e2d8; padding: 3px 5px; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.grid th { font-size: 7pt; letter-spacing: 0.1em; text-transform: uppercase; color: #8c8b82; }
+.grid td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.grid tr.urgent td:first-child { border-left: 3px solid #8a2f2f; padding-left: 5px; }
+.grid tr.soon td:first-child { border-left: 3px solid #8a6a2f; padding-left: 5px; }
+
+.health { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #e6e2d8; border: 1px solid #e6e2d8; font-size: 8pt; }
+.health .cell { background: #fffefb; padding: 4px 6px; min-width: 0; }
+.health .k { display: block; font-size: 6.5pt; letter-spacing: 0.08em; text-transform: uppercase; color: #8c8b82; overflow-wrap: anywhere; }
+.health .v { display: block; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+
+footer { border-top: 2px solid #1c1d1a; padding-top: 8px; margin-top: 18px; font-size: 8pt; color: #4a4a44; }
+.page-break { break-after: page; page-break-after: always; height: 0; }
+
+/* The section jumps. One quiet line under the masthead: on screen it is a
+   navigation bar, on paper it is a contents line, and in the PDF Chromium turns
+   each entry into a real internal link. No underlines — the separators carry
+   the rhythm instead. */
+.brief-nav {
+  font-size: 7.5pt; letter-spacing: 0.1em; text-transform: uppercase; color: #6b6a63;
+  border-bottom: 1px solid #ddd9cf; padding-bottom: 7px; margin: -6px 0 14px;
+}
+.brief-nav a { color: #43433d; border-bottom: 0; }
+.brief-nav a + a { margin-left: 0; }
+.brief-nav .sep { color: #b3ada0; padding: 0 6px; }
+
+/* The private edition's link back into the running product. */
+.applink { font-size: 7.5pt; letter-spacing: 0.08em; text-transform: uppercase; }
+.card .applink { display: block; margin-top: 4px; }
+
+/* Disclosures: the screen folds a tour or a task's members away; paper cannot
+   be clicked, so print opens every one of them. */
+details { margin: 4px 0 0; font-size: 8.5pt; }
+details > summary { cursor: pointer; color: #43433d; }
+details ul { margin: 3px 0 0; padding-left: 15px; }
+details li { margin-bottom: 1px; overflow-wrap: anywhere; }
+.card details.members { border-top: 1px dotted #e6e2d8; padding-top: 3px; }
+
+/* ------------------------------------------------------------------ paper.
+   THE PRINT EDITION IS DENSER, NOT SHORTER.
+
+   The founder reads this on paper in a normal week and wants the decision to
+   fit a handful of sheets. Every rule below is a MEASUREMENT change — type
+   size, leading, padding, column count. Nothing is hidden, nothing is dropped:
+   the same six anchors, the same cards, the same tables, every disclosure
+   still forced open, every link still live. What goes away is the screen's
+   air, which paper does not need.
+
+   The two card sections flow into two columns; at 178mm of usable A4 column
+   that is 85mm a card, which carries a card's longest line (a portal URL)
+   without breaking the page box, because every cell and route already wraps
+   mid-token. break-inside:avoid keeps a card whole across the column and
+   page boundary.
+
+   Printed measurements are in pt because the page is a physical object: 8.4pt
+   on 1.3 leading is a working-document size, not a fine-print size. */
+@media print {
+  body { background: #fff; font-size: 8.4pt; line-height: 1.3; }
+  .sheet { padding: 0; max-width: none; background: #fff; }
+  a { color: #1c1d1a; border-bottom: 0; }
+  p { margin: 0 0 0.35em; }
+
+  .masthead { padding-bottom: 4px; margin-bottom: 6px; }
+  .masthead .wordmark { font-size: 13pt; }
+  .masthead .tagline { font-size: 7pt; margin-top: 2px; }
+  .masthead .meta { gap: 1px 14px; margin-top: 4px; font-size: 6.4pt; }
+  .masthead .meta span strong { font-size: 5.8pt; }
+  .masthead .profile { font-size: 6.8pt; margin-top: 3px; }
+
+  .brief-nav { font-size: 6.4pt; padding-bottom: 4px; margin: -4px 0 8px; border-bottom-color: #c9c4b8; }
+
+  section { margin: 0 0 8px; }
+  section > h2 { font-size: 7pt; padding-bottom: 2px; margin-bottom: 4px; }
+  .lede { font-size: 7pt; margin-bottom: 0.3em; }
+  .empty { font-size: 7.6pt; }
+
+  /* Eight counts, one line. On screen they wrap to two rows of four; on A4
+     there is room for all eight side by side, which buys back a whole band. */
+  .kpis { grid-template-columns: repeat(8, 1fr); margin-bottom: 6px; }
+  .kpis .cell { padding: 2px 4px; }
+  .kpis .k { font-size: 5.4pt; letter-spacing: 0.04em; }
+  .kpis .v { font-size: 9pt; }
+  .summary { font-size: 7.8pt; padding-left: 6px; margin-bottom: 2px; }
+
+  .cards { column-count: 2; column-gap: 5mm; }
+  .cards > .card { break-inside: avoid; margin: 0 0 3px; }
+  .card { padding: 3px 6px; margin-bottom: 3px; line-height: 1.2; }
+  .card-head { gap: 5px; }
+  .card-head h3 { font-size: 8.4pt; }
+  .card-head .badge { font-size: 5.6pt; }
+  .sub { font-size: 6.4pt; }
+  .verdict { font-size: 7.4pt; margin: 2px 0 1px; }
+  .facts { font-size: 7pt; margin-top: 2px; }
+  .facts > li { padding: 0; }
+  .facts .k { min-width: 52px; padding-right: 4px; font-size: 5.6pt; }
+  /* "Why it fits" is a handful of short phrases. On screen they are a bulleted
+     list; on paper, in an 85mm column, each bullet buys a line break it does
+     not need — so the same phrases run on, separated by the same middot the
+     rest of the brief uses. Every phrase survives. */
+  .why { font-size: 7pt; padding-left: 0; margin-top: 2px; list-style: none; }
+  .why li { display: inline; }
+  .why li + li::before { content: " · "; color: #8c8b82; }
+  .next { font-size: 7pt; margin-top: 2px; padding-top: 2px; }
+  .next .label { font-size: 5.8pt; margin-right: 4px; }
+  .src { font-size: 5.8pt; }
+  .tag { font-size: 5.8pt; }
+  .applink { font-size: 6.4pt; }
+
+  /* The tables are the reference half: they are read by looking things up,
+     which tolerates a smaller face than the cards that are read as prose. */
+  .grid { font-size: 6.8pt; }
+  .grid th, .grid td { padding: 1.5px 4px; }
+  .grid th { font-size: 5.8pt; }
+
+  .health { grid-template-columns: repeat(6, 1fr); font-size: 6.8pt; }
+  .health .cell { padding: 2px 4px; }
+  .health .k { font-size: 5.4pt; }
+
+  details { font-size: 7.4pt; margin-top: 3px; }
+  details ul { padding-left: 11px; }
+
+  /* THE RADAR'S TOUR STOPS WERE THE WHOLE PROBLEM.
+     Print forces every disclosure open, and a tour's stops opened inside a
+     23%-wide name cell: eleven stops cost eleven bulleted blocks, each of them
+     wrapping to four lines in a 40mm column — one tour ate two thirds of a
+     page. Paper gets the same eleven stops as ONE run-on line, in a cell wide
+     enough to hold it. Nothing is removed; the stops simply stop being a
+     column of near-empty bullets.
+     The column fractions are forced because the widths they override are
+     inline style attributes on the col elements — the only place in
+     this stylesheet where that is true, and the reason it is written here. */
+  .radar col:nth-child(1) { width: 36% !important; }
+  .radar col:nth-child(2) { width: 10% !important; }
+  .radar col:nth-child(3) { width: 12% !important; }
+  .radar col:nth-child(4) { width: 7% !important; }
+  .radar col:nth-child(5) { width: 6% !important; }
+  .radar col:nth-child(6) { width: 10% !important; }
+  .radar col:nth-child(7) { width: 10% !important; }
+  .radar col:nth-child(8) { width: 9% !important; }
+  .radar details { font-size: 6.6pt; margin-top: 1px; }
+  .radar details > summary { font-size: 6.8pt; }
+  .radar ul.stops { margin: 1px 0 0; padding-left: 0; list-style: none; }
+  .radar ul.stops > li { display: inline; margin: 0; }
+  .radar ul.stops > li + li::before { content: " · "; color: #8c8b82; }
+
+  footer { margin-top: 10px; padding-top: 5px; font-size: 6.8pt; }
+  footer p { margin: 0 0 0.2em; }
+
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  details > summary ~ * { display: block !important; }
+  /* display:block alone does NOT open a closed <details> in Chromium 131+:
+     the folded content lives behind ::details-content, which the UA stylesheet
+     hides with content-visibility. Verified by printing the brief and reading
+     the PDF back — the tour stops and the task members were missing until this
+     rule was added. Browsers without the pseudo-element drop this rule only. */
+  details::details-content { content-visibility: visible !important; block-size: auto !important; }
+}
+@page { size: A4; margin: 16mm; }
+</style>
+</head>
+<body>
+<div class="sheet">
+<header class="masthead">
+<div class="wordmark">PitchRadar</div>
+<div class="tagline">Weekly Opportunity Brief</div>
+<div class="meta">
+<span><strong>Report date</strong>27 Jul 2026</span>
+<span><strong>Week</strong>2026-W31 · 27 Jul 2026 – 02 Aug 2026</span>
+<span><strong>Generated</strong>27 Jul 2026, 09:00 Europe/Berlin</span>
+<span><strong>Data freshness</strong>no source collection recorded yet</span>
+</div>
+<p class="profile">speciality food truck · home region Brandenburg · trades Friday, Saturday, Sunday (Thursday optional) · up to 480 min travel, exceptionally 600 min</p>
+</header>
+
+<nav class="brief-nav"><a href="#overview">Overview</a><span class="sep">·</span><a href="#action-now">Action now</a><span class="sep">·</span><a href="#top-opportunities">Top opportunities</a><span class="sep">·</span><a href="#deadlines">Deadlines</a><span class="sep">·</span><a href="#bookings">Bookings</a><span class="sep">·</span><a href="#system-health">System health</a></nav>
+
+<section>
+<h2 id="overview">Where we stand</h2>
+<div class="kpis"><div class="cell"><span class="k">Events checked</span><span class="v">21</span></div><div class="cell"><span class="k">Vendor-relevant</span><span class="v">15</span></div><div class="cell"><span class="k">Shortlisted</span><span class="v">9</span></div><div class="cell"><span class="k">Recommended</span><span class="v">1</span></div><div class="cell"><span class="k">Action now (tasks)</span><span class="v">5</span></div><div class="cell"><span class="k">Deadlines ≤30d</span><span class="v">0</span></div><div class="cell"><span class="k">Current bookings</span><span class="v">1</span></div><div class="cell"><span class="k">Conflicts</span><span class="v">4</span></div></div>
+<p class="summary">21 events checked, 15 vendor-relevant; 9 shortlisted and 1 recommended outright. 5 tasks covering 6 events need action now (2 urgent), 0 deadlines close within 30 days, 1 booking holds the truck and 4 prospects collide with it.</p>
+</section>
+
+<section>
+<h2 id="action-now">Action now</h2>
+<p class="lede">5 tasks covering 6 events, most urgent first. One organizer, one call, every date it covers.</p>
+<div class="cards"><article class="card urgent">
+<div class="card-head"><div><h3>Organizer unpublished — source: Stadt Schwedt/Oder</h3><p class="sub">2 events · REVIEW CONFLICT</p></div><span class="badge urgent">URGENT</span></div>
+<ul class="facts">
+<li><span class="k">Contact</span><span class="route">Organizer site <a href="https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787">brandenburg.de/de/…</a> · Stadt Schwedt/Oder · no named decision-maker recorded yet</span><span class="src">Source: <a href="https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787">Stadt Schwedt/Oder</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Priority dates</span>01 Aug 2026 · 25 Sept 2026 – 27 Sept 2026</li>
+<li><span class="k">Confidence</span>MEDIUM — best of the 2 events behind this task</li>
+</ul>
+<details class="members"><summary>2 events behind this task</summary><ul><li><strong>Brückenfest Criewen</strong> · 01 Aug 2026 · Schwedt/Oder, Brandenburg · GOOD FIT · No deadline published — not yet found</li><li><strong>Schwedter Oktoberfest</strong> · 25 Sept 2026 – 27 Sept 2026 · Schwedt/Oder, Brandenburg · GOOD FIT · No deadline published — not yet found</li></ul></details>
+<p class="next"><span class="label">Do this</span>Decide between Brückenfest Criewen (01 Aug 2026) and the booking that already holds the truck on those dates</p>
+
+</article><article class="card urgent">
+<div class="card-head"><div><h3>Muster Events GmbH</h3><p class="sub">1 event · REVIEW CONFLICT</p></div><span class="badge urgent">URGENT</span></div>
+<ul class="facts">
+<li><span class="k">Contact</span><span class="route">Organizer site <a href="https://www.example-muster-events.de/">example-muster-events.de</a> · Muster Events GmbH · no named decision-maker recorded yet</span><span class="src">Source: <a href="https://www.example-muster-events.de/">Muster Events GmbH</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Priority dates</span>07 Aug 2026 – 09 Aug 2026</li>
+<li><span class="k">Confidence</span>HIGH — best of the 1 event behind this task</li>
+</ul>
+<details class="members"><summary>1 event behind this task</summary><ul><li><strong>Street Food Festival Hockenheim</strong> · 07 Aug 2026 – 09 Aug 2026 · Hockenheim, Baden-Württemberg · GOOD FIT · No deadline published — not yet found</li></ul></details>
+<p class="next"><span class="label">Do this</span>Decide between Street Food Festival Hockenheim (07 Aug 2026 – 09 Aug 2026) and the booking that already holds the truck on those dates</p>
+
+</article><article class="card watch">
+<div class="card-head"><div><h3>Organizer unpublished — source: Land Brandenburg</h3><p class="sub">1 event · VERIFY CATEGORY AVAILABILITY</p></div><span class="badge watch">WATCH</span></div>
+<ul class="facts">
+<li><span class="k">Contact</span><span class="route">Organizer site <a href="https://esf.brandenburg.de/esf/de/ansicht/~22-06-2026-brandaktuell-brandenburg-will-dich">esf.brandenburg.de/esf/…</a> · Land Brandenburg · no named decision-maker recorded yet</span><span class="src">Source: <a href="https://esf.brandenburg.de/esf/de/ansicht/~22-06-2026-brandaktuell-brandenburg-will-dich">Land Brandenburg</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Priority dates</span>28 Aug 2026 – 30 Aug 2026</li>
+<li><span class="k">Confidence</span>MEDIUM — best of the 1 event behind this task</li>
+</ul>
+<details class="members"><summary>1 event behind this task</summary><ul><li><strong>Stadtfest Eisenhüttenstadt</strong> · 28 Aug 2026 – 30 Aug 2026 · Eisenhüttenstadt, Brandenburg · GOOD FIT · No deadline published — not yet found</li></ul></details>
+<p class="next"><span class="label">Do this</span>Ask Organizer unpublished — source: Land Brandenburg to close the open question on Stadtfest Eisenhüttenstadt before further effort: Pitch fee</p>
+
+</article><article class="card watch">
+<div class="card-head"><div><h3>Stadt Norden</h3><p class="sub">1 event · VERIFY CATEGORY AVAILABILITY</p></div><span class="badge watch">WATCH</span></div>
+<ul class="facts">
+<li><span class="k">Contact</span><span class="route">Apply via <a href="https://www.norden.de/Stadtleben/Kultur-Freizeit/M%C3%A4rkte-Feste/Norder-Sommerfest/Norder-Sommerfest-2026-Bewerbungsphase-gestartet.php?FID=3170.51782.1&amp;La=1&amp;ModID=7&amp;NavID=3170.108&amp;object=tx%2C3170.5">norden.de/Stadtleben/…</a> · Stadt Norden · reachability not yet confirmed</span><span class="src">Source: <a href="https://www.norden.de/Stadtleben/Kultur-Freizeit/M%C3%A4rkte-Feste/Norder-Sommerfest/Norder-Sommerfest-2026-Bewerbungsphase-gestartet.php?FID=3170.51782.1&amp;La=1&amp;ModID=7&amp;NavID=3170.108&amp;object=tx%2C3170.5">Stadt Norden</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Priority dates</span>28 Aug 2026 – 30 Aug 2026</li>
+<li><span class="k">Confidence</span>HIGH — best of the 1 event behind this task</li>
+</ul>
+<details class="members"><summary>1 event behind this task</summary><ul><li><strong>Norder Sommerfest</strong> · 28 Aug 2026 – 30 Aug 2026 · Norden, Lower Saxony · GOOD FIT · No deadline published — not yet found</li></ul></details>
+<p class="next"><span class="label">Do this</span>Ask Stadt Norden to close the open question on Norder Sommerfest before further effort: Speciality pitch available?</p>
+
+</article><article class="card watch">
+<div class="card-head"><div><h3>Weihnachtsrodeo</h3><p class="sub">1 event · VERIFY CATEGORY AVAILABILITY</p></div><span class="badge watch">WATCH</span></div>
+<ul class="facts">
+<li><span class="k">Contact</span><span class="route">Apply via <a href="https://www.example-weihnachtsrodeo.de/bewerbung">example-weihnachtsrodeo.de/bewerbung</a> · Weihnachtsrodeo · reachability not yet confirmed</span><span class="src">Source: <a href="https://www.example-weihnachtsrodeo.de/bewerbung">Weihnachtsrodeo</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Priority dates</span>12 Dec 2026 – 13 Dec 2026</li>
+<li><span class="k">Confidence</span>HIGH — best of the 1 event behind this task</li>
+</ul>
+<details class="members"><summary>1 event behind this task</summary><ul><li><strong>Weihnachtsrodeo 2026</strong> · 12 Dec 2026 – 13 Dec 2026 · Berlin, Berlin · STRONG FIT · No deadline published — not yet found</li></ul></details>
+<p class="next"><span class="label">Do this</span>Ask Weihnachtsrodeo to close the open question on Weihnachtsrodeo 2026 before further effort: Pitch fee</p>
+
+</article></div>
+</section>
+
+<section>
+<h2 id="top-opportunities">Top opportunities</h2>
+<p class="lede">The strongest places to try to get the truck booked next. At most five; the full register carries the rest with the complete score arithmetic.</p>
+<div class="cards"><article class="card">
+<div class="card-head"><div><h3>Weihnachtsrodeo 2026</h3><p class="sub">12 Dec 2026 – 13 Dec 2026 · Berlin, Berlin · 2 trading days</p></div><span class="badge">Ready to contact</span></div>
+<p class="verdict"><strong>STRONG FIT</strong> · 74/100 · HIGH CONFIDENCE — <span class="cause">official source (Weihnachtsrodeo), organizer identified</span></p>
+<ul class="facts">
+<li><span class="k">Organizer</span>Weihnachtsrodeo</li>
+<li><span class="k">Route</span><span class="route">Apply via <a href="https://www.example-weihnachtsrodeo.de/bewerbung">example-weihnachtsrodeo.de/bewerbung</a> · Weihnachtsrodeo · reachability not yet confirmed</span><span class="src">Source: <a href="https://www.example-weihnachtsrodeo.de/bewerbung">Weihnachtsrodeo</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Deadline</span>No deadline published — not yet found</li>
+
+<li><span class="k">Key unknowns</span><span class="missing">Application deadline; Pitch fee; Power; Water; Pitch footprint</span></li>
+</ul>
+<p class="sub" style="margin-top:5px">Why it fits</p>
+<ul class="why"><li>market or Christmas-market audience</li><li>every trading day is a normal trading day</li><li>home region</li><li>application window open</li></ul>
+<p class="next"><span class="label">Next action</span>VERIFY CATEGORY AVAILABILITY — Confirm a speciality pitch remains before owner approval.</p>
+
+</article><article class="card">
+<div class="card-head"><div><h3>Street Food Festival Hockenheim</h3><p class="sub">07 Aug 2026 – 09 Aug 2026 · Hockenheim, Baden-Württemberg · 3 trading days</p></div><span class="badge">Verifying</span></div>
+<p class="verdict"><strong>GOOD FIT</strong> · 71/100 · HIGH CONFIDENCE — <span class="cause">official source (Muster Events GmbH), organizer identified</span></p>
+<ul class="facts">
+<li><span class="k">Organizer</span>Muster Events GmbH</li>
+<li><span class="k">Route</span><span class="route">Organizer site <a href="https://www.example-muster-events.de/">example-muster-events.de</a> · Muster Events GmbH · no named decision-maker recorded yet</span><span class="src">Source: <a href="https://www.example-muster-events.de/">Muster Events GmbH</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Deadline</span>No deadline published — not yet found</li>
+
+<li><span class="k">Key unknowns</span><span class="missing">Vendor place available?; Application deadline; Travel from exact postcode; Fee; Infrastructure</span></li>
+</ul>
+<p class="sub" style="margin-top:5px">Why it fits</p>
+<ul class="why"><li>direct street-food fit</li><li>every trading day is a normal trading day</li><li>multi-day trading (3 days)</li></ul>
+<p class="next"><span class="label">Next action</span>REVIEW CONFLICT — Find the decision-maker and verify whether applications are still accepted.</p>
+
+</article><article class="card">
+<div class="card-head"><div><h3>Stadtfest Eisenhüttenstadt</h3><p class="sub">28 Aug 2026 – 30 Aug 2026 · Eisenhüttenstadt, Brandenburg · 3 trading days</p></div><span class="badge">Verifying</span></div>
+<p class="verdict"><strong>GOOD FIT</strong> · 68/100 · MEDIUM CONFIDENCE — <span class="cause">official source (Land Brandenburg) recorded, but the event is not verified end to end</span></p>
+<ul class="facts">
+<li><span class="k">Organizer</span>Organizer unpublished — source: Land Brandenburg</li>
+<li><span class="k">Route</span><span class="route">Organizer site <a href="https://esf.brandenburg.de/esf/de/ansicht/~22-06-2026-brandaktuell-brandenburg-will-dich">esf.brandenburg.de/esf/…</a> · Land Brandenburg · no named decision-maker recorded yet</span><span class="src">Source: <a href="https://esf.brandenburg.de/esf/de/ansicht/~22-06-2026-brandaktuell-brandenburg-will-dich">Land Brandenburg</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Deadline</span>No deadline published — not yet found</li>
+
+<li><span class="k">Key unknowns</span><span class="missing">Organizer; End date; Application route; Pitch fee; Infrastructure</span></li>
+</ul>
+<p class="sub" style="margin-top:5px">Why it fits</p>
+<ul class="why"><li>city-festival footfall</li><li>every trading day is a normal trading day</li><li>home region</li><li>multi-day trading (3 days)</li></ul>
+<p class="next"><span class="label">Next action</span>VERIFY CATEGORY AVAILABILITY — Find the decision-maker and verify whether applications are still accepted.</p>
+
+</article><article class="card">
+<div class="card-head"><div><h3>Schwedter Oktoberfest</h3><p class="sub">25 Sept 2026 – 27 Sept 2026 · Schwedt/Oder, Brandenburg · 3 trading days</p></div><span class="badge">Verifying</span></div>
+<p class="verdict"><strong>GOOD FIT</strong> · 68/100 · MEDIUM CONFIDENCE — <span class="cause">official source (Stadt Schwedt/Oder) recorded, but the event is not verified end to end</span></p>
+<ul class="facts">
+<li><span class="k">Organizer</span>Organizer unpublished — source: Stadt Schwedt/Oder</li>
+<li><span class="k">Route</span><span class="route">Organizer site <a href="https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787">brandenburg.de/de/…</a> · Stadt Schwedt/Oder · no named decision-maker recorded yet</span><span class="src">Source: <a href="https://brandenburg.de/de/kultur-und-freizeit/veranstaltungen/jahreshoehepunkte/31787">Stadt Schwedt/Oder</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Deadline</span>No deadline published — not yet found</li>
+
+<li><span class="k">Key unknowns</span><span class="missing">Organizer contact; Application route; Pitch fee; Visitor evidence; Infrastructure</span></li>
+</ul>
+<p class="sub" style="margin-top:5px">Why it fits</p>
+<ul class="why"><li>city-festival footfall</li><li>every trading day is a normal trading day</li><li>home region</li><li>multi-day trading (3 days)</li></ul>
+<p class="next"><span class="label">Next action</span>VERIFY CATEGORY AVAILABILITY — Find the decision-maker and verify whether applications are still accepted.</p>
+
+</article><article class="card">
+<div class="card-head"><div><h3>Norder Sommerfest</h3><p class="sub">28 Aug 2026 – 30 Aug 2026 · Norden, Lower Saxony · 3 trading days</p></div><span class="badge">Ready to contact</span></div>
+<p class="verdict"><strong>GOOD FIT</strong> · 66/100 · HIGH CONFIDENCE — <span class="cause">official source (Stadt Norden), organizer identified</span></p>
+<ul class="facts">
+<li><span class="k">Organizer</span>Stadt Norden</li>
+<li><span class="k">Route</span><span class="route">Apply via <a href="https://www.norden.de/Stadtleben/Kultur-Freizeit/M%C3%A4rkte-Feste/Norder-Sommerfest/Norder-Sommerfest-2026-Bewerbungsphase-gestartet.php?FID=3170.51782.1&amp;La=1&amp;ModID=7&amp;NavID=3170.108&amp;object=tx%2C3170.5">norden.de/Stadtleben/…</a> · Stadt Norden · reachability not yet confirmed</span><span class="src">Source: <a href="https://www.norden.de/Stadtleben/Kultur-Freizeit/M%C3%A4rkte-Feste/Norder-Sommerfest/Norder-Sommerfest-2026-Bewerbungsphase-gestartet.php?FID=3170.51782.1&amp;La=1&amp;ModID=7&amp;NavID=3170.108&amp;object=tx%2C3170.5">Stadt Norden</a> · seen 27 Jul 2026</span></li>
+<li><span class="k">Deadline</span>No deadline published — not yet found</li>
+
+<li><span class="k">Key unknowns</span><span class="missing">Speciality pitch available?; Pitch fee; Power; Water; Expected attendance</span></li>
+</ul>
+<p class="sub" style="margin-top:5px">Why it fits</p>
+<ul class="why"><li>city-festival footfall</li><li>every trading day is a normal trading day</li><li>application window open</li><li>multi-day trading (3 days)</li></ul>
+<p class="next"><span class="label">Next action</span>VERIFY CATEGORY AVAILABILITY — Ask whether a suitable pitch remains before spending application effort.</p>
+
+</article></div>
+</section>
+
+<div class="page-break"></div>
+
+<section>
+<h2>Opportunity radar</h2>
+<p class="lede">Tracked, but no task this week turns on them. A touring operator's stops are one row — open it to see every date; the register carries each stop on its own line.</p>
+<table class="grid radar"><colgroup><col style="width:23%" /><col style="width:13%" /><col style="width:13%" /><col style="width:9%" /><col style="width:8%" /><col style="width:11%" /><col style="width:12%" /><col style="width:11%" /></colgroup>
+<thead><tr><th>Event</th><th>Dates</th><th>Location</th><th>Fit</th><th>Conf.</th><th>Pipeline</th><th>Deadline</th><th>Contact</th></tr></thead>
+<tbody><tr><td>Stadtfest Dessau 2027</td><td>02 Jul 2027 – 04 Jul 2027</td><td>Dessau-Roßlau, Saxony-Anhalt</td><td>GOOD FIT</td><td>HIGH</td><td>Ready to contact</td><td>Deadline 31 Mar — 247 days left</td><td>Named contact, unconfirmed</td></tr><tr><td>31. Tabakblütenfest</td><td>15 Aug 2026</td><td>Vierraden, Brandenburg</td><td>GOOD FIT</td><td>MEDIUM</td><td>Discovered</td><td>No deadline published — not yet found</td><td>Organizer website · Stadt Schwedt/Oder</td></tr><tr><td>Stadtfest Rathenow</td><td>06 Sept 2026</td><td>Rathenow, Brandenburg</td><td>GOOD FIT</td><td>MEDIUM</td><td>Verifying</td><td>No deadline published — not yet found</td><td>Organizer website · Land Brandenburg</td></tr><tr><td><details><summary>Kranichtage Weekend tour — 2 stops, next: Lower Oder Valley 02 Oct – 04 Oct · Organizer unpublished — source: Stadt Schwedt/Oder</summary><ul class="stops"><li>21. Kranichtage · Weekend 1 · Lower Oder Valley, Brandenburg · 02 Oct 2026 – 04 Oct 2026</li><li>21. Kranichtage · Weekend 2 · Lower Oder Valley, Brandenburg · 09 Oct 2026 – 11 Oct 2026</li></ul></details></td><td>2 stops</td><td>Lower Oder Valley, Brandenburg +1 more</td><td>WATCH</td><td>MEDIUM</td><td>Discovered</td><td>No deadline published — not yet found</td><td>Organizer website · Stadt Schwedt/Oder</td></tr><tr><td>Tag der Industriekultur <span class="tag">relevance unverified</span></td><td>08 Aug 2026</td><td>Vierraden, Brandenburg</td><td>WATCH</td><td>MEDIUM</td><td>Discovered</td><td>No deadline published — not yet found</td><td>Organizer website · Stadt Schwedt/Oder</td></tr><tr><td>Rudolstadt Festival 2027</td><td>01 Jul 2027 – 04 Jul 2027</td><td>Rudolstadt, Thuringia</td><td>WATCH</td><td>MEDIUM</td><td>Verifying</td><td>No deadline published — not yet found</td><td>Named contact, unconfirmed</td></tr><tr><td>CANALETTO · Dresden City Festival</td><td>14 Aug 2026 – 16 Aug 2026</td><td>Dresden, Saxony</td><td>WATCH</td><td>MEDIUM</td><td>Verifying</td><td>No deadline published — not yet found</td><td>Application portal, unconfirmed</td></tr><tr><td>Tag der Sachsen 2027 <span class="tag">relevance unverified</span></td><td>18 Jun 2027 – 20 Jun 2027</td><td>Plauen, Saxony</td><td>WATCH</td><td>HIGH</td><td>Ready to contact</td><td>Deadline 31 Dec — 157 days left</td><td>Application portal, unconfirmed</td></tr><tr><td>Laternenfest Halle</td><td>28 Aug 2026 – 30 Aug 2026</td><td>Halle (Saale), Saxony-Anhalt</td><td>WATCH</td><td>HIGH</td><td>Verifying</td><td>No deadline published — not yet found</td><td>Named contact, unconfirmed</td></tr><tr><td>Müllroser Seezauber <span class="tag">relevance unverified</span></td><td>01 Aug 2026</td><td>Müllrose, Brandenburg</td><td>WATCH</td><td>MEDIUM</td><td>Discovered</td><td>No deadline published — not yet found</td><td>Organizer website · Land Brandenburg</td></tr><tr><td>Mainzer Rheinfrühling 2027 <span class="tag">relevance unverified</span></td><td>20 Mar 2027 – 04 Apr 2027</td><td>Mainz, Rhineland-Palatinate</td><td>WATCH</td><td>HIGH</td><td>Ready to contact</td><td>Deadline 31 Aug — 35 days left</td><td>Named contact, unconfirmed</td></tr><tr><td>Annafest Forchheim 2027</td><td>23 Jul 2027 – 02 Aug 2027</td><td>Forchheim, Bavaria</td><td>WATCH</td><td>HIGH</td><td>Ready to contact</td><td>Deadline 30 Sept — 65 days left</td><td>Named contact, unconfirmed</td></tr><tr><td>Sportfest für alle</td><td>29 Aug 2026</td><td>Brandenburg an der Havel, Brandenburg</td><td>WATCH</td><td>MEDIUM</td><td>Discovered</td><td>No deadline published — not yet found</td><td>Organizer website · Land Brandenburg</td></tr></tbody></table>
+</section>
+
+<section>
+<h2 id="bookings">Bookings &amp; conflicts</h2>
+<p class="lede">Holding the truck now:</p><article class="card">
+<div class="card-head"><div><h3>Seefest am Demo-Ufer</h3><p class="sub">22 Jul 2026 – 09 Aug 2026 · Musterstadt, Lower Saxony</p></div><span class="badge">Trading now — the truck is committed</span></div>
+<ul class="facts">
+<li><span class="k">Organizer</span>Demo Veranstaltungs GmbH</li>
+<li><span class="k">Stand / zone</span>Streetfood am Ufer · Nordpromenade</li>
+<li><span class="k">Weeks held</span>2026-W30, 2026-W31, 2026-W32</li>
+
+</ul></article><p class="lede">Prospects colliding with a booking that holds the truck:</p><table class="grid"><colgroup><col style="width:34%" /><col style="width:22%" /><col style="width:22%" /><col style="width:22%" /></colgroup><thead><tr><th>Event</th><th>Dates</th><th>Location</th><th>Action</th></tr></thead><tbody><tr class="urgent"><td>Street Food Festival Hockenheim</td><td>07 Aug 2026 – 09 Aug 2026</td><td>Hockenheim, Baden-Württemberg</td><td>REVIEW CONFLICT</td></tr><tr class="urgent"><td>Brückenfest Criewen</td><td>01 Aug 2026</td><td>Schwedt/Oder, Brandenburg</td><td>REVIEW CONFLICT</td></tr><tr class="urgent"><td>Tag der Industriekultur</td><td>08 Aug 2026</td><td>Vierraden, Brandenburg</td><td>NO ACTION</td></tr><tr class="urgent"><td>Müllroser Seezauber</td><td>01 Aug 2026</td><td>Müllrose, Brandenburg</td><td>NO ACTION</td></tr></tbody></table>
+</section>
+
+<section>
+<h2 id="deadlines">Deadline radar</h2>
+<p class="lede">Only deadlines with recorded evidence appear here, soonest first.</p>
+<table class="grid"><colgroup><col style="width:28%" /><col style="width:16%" /><col style="width:14%" /><col style="width:8%" /><col style="width:10%" /><col style="width:24%" /></colgroup>
+<thead><tr><th>Event</th><th>Location</th><th>Deadline</th><th class="num">Days</th><th>Urgency</th><th>Route &amp; action</th></tr></thead>
+<tbody><tr class="watch"><td>Mainzer Rheinfrühling 2027</td><td>Mainz, Rhineland-Palatinate</td><td>31 Aug 2026</td><td class="num">35</td><td>WATCH</td><td>Named contact, unconfirmed → NO ACTION</td></tr><tr class="watch"><td>Annafest Forchheim 2027</td><td>Forchheim, Bavaria</td><td>30 Sept 2026</td><td class="num">65</td><td>WATCH</td><td>Named contact, unconfirmed → NO ACTION</td></tr><tr class="watch"><td>Tag der Sachsen 2027</td><td>Plauen, Saxony</td><td>31 Dec 2026</td><td class="num">157</td><td>WATCH</td><td>Application portal, unconfirmed → NO ACTION</td></tr><tr class="watch"><td>Stadtfest Dessau 2027</td><td>Dessau-Roßlau, Saxony-Anhalt</td><td>31 Mar 2027</td><td class="num">247</td><td>WATCH</td><td>Named contact, unconfirmed → VERIFY CATEGORY AVAILABILITY</td></tr></tbody></table>
+</section>
+
+<section>
+<h2>Weather</h2>
+<p class="empty">No decision this week turns on the weather: 0 forecast(s) are recorded and none raises a risk flag on a booked or shortlisted event inside the 10-day window. Every recorded forecast is in the register.</p>
+</section>
+
+<section>
+<h2 id="system-health">System health</h2>
+<p class="lede">What the machine did this week. These are technical counts, not opportunities.</p>
+<div class="health"><div class="cell"><span class="k">Events collected</span><span class="v">21</span></div><div class="cell"><span class="k">Registered sources</span><span class="v">15</span></div><div class="cell"><span class="k">Noise excluded</span><span class="v">0</span></div><div class="cell"><span class="k">Organizer known</span><span class="v">11 of 21 (52%)</span></div><div class="cell"><span class="k">Routes verified</span><span class="v">0 of 21 (0%)</span></div><div class="cell"><span class="k">Deadline evidence</span><span class="v">5 of 21 (24%)</span></div><div class="cell"><span class="k">Weather coverage</span><span class="v">0 of 21 (0%)</span></div><div class="cell"><span class="k">Evidence records</span><span class="v">25</span></div><div class="cell"><span class="k">Locations unresolved</span><span class="v">0</span></div><div class="cell"><span class="k">Relevance unverified</span><span class="v">6</span></div><div class="cell"><span class="k">Catalogue mode</span><span class="v">fixtures</span></div><div class="cell"><span class="k">Source health</span><span class="v">never_checked 15</span></div></div>
+</section>
+
+<section>
+<h2>Organizer drafts</h2>
+<p class="lede">Draft — nothing has been sent; owner approval required before any contact.</p>
+<table class="grid"><colgroup><col style="width:44%" /><col style="width:16%" /><col style="width:40%" /></colgroup>
+<thead><tr><th>Event</th><th>Channel</th><th>Status</th></tr></thead>
+<tbody><tr><td>Stadtfest Dessau 2027</td><td>email</td><td>Draft ready — owner approval required</td></tr><tr><td>Rudolstadt Festival 2027</td><td>email</td><td>Draft ready — owner approval required</td></tr><tr><td>Laternenfest Halle</td><td>email</td><td>Draft ready — owner approval required</td></tr><tr><td>Annafest Forchheim 2027</td><td>email</td><td>Draft ready — owner approval required</td></tr></tbody></table>
+<p class="sub">The full German text and English translation of each draft are in the register workbook, sheet "Organizer Drafts".</p>
+</section>
+
+<footer>
+<p>Every fact above links to its recorded source; unknowns are stated, never estimated.</p>
+<p>No consumer-calendar entries were excluded; every known event is a possible vendor opportunity.</p>
+<p>Full arithmetic, every event, every source URL and the complete organizer drafts are in the operational register workbook that accompanies this brief.</p>
+<p>Built from the committed fixture catalogue, not a live database read.</p>
+
+</footer>
+</div>
+</body>
+</html>

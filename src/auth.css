@@ -1,0 +1,337 @@
+.owner-threshold {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(430px, .82fr);
+  color: #f4ede5;
+  background:
+    radial-gradient(circle at 11% 8%, rgba(139, 94, 60, .13), transparent 26%),
+    radial-gradient(circle at 88% 80%, rgba(81, 50, 33, .1), transparent 24%),
+    #0e0c0b;
+}
+
+.owner-threshold::after {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  opacity: .16;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.13'/%3E%3C/svg%3E");
+}
+
+.owner-threshold-brief,
+.owner-threshold-access {
+  position: relative;
+  z-index: 1;
+}
+
+.owner-threshold-brief {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(52px, 7vw, 112px);
+  border-right: 1px solid rgba(190, 132, 91, .25);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 58px;
+  color: #f2e8dc;
+  font: 700 clamp(24px, 2.4vw, 38px)/1 "Manrope", sans-serif;
+  letter-spacing: -.055em;
+}
+
+.auth-brand-mark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: #e8d1bc;
+  background: #211914;
+  border: 1px solid #8b5e3c;
+  border-radius: 14px;
+  box-shadow: inset 0 0 0 4px rgba(139, 94, 60, .1);
+}
+
+.auth-brand-mark svg {
+  width: 23px;
+}
+
+.auth-system-state,
+.auth-local-state {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #bd835a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.auth-system-state i,
+.auth-local-state i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #bd7e55;
+  box-shadow: 0 0 0 5px rgba(139, 94, 60, .13);
+}
+
+.owner-threshold h1 {
+  max-width: 780px;
+  margin: 24px 0 22px;
+  color: #f4ede5;
+  font: 400 clamp(58px, 6.4vw, 104px)/.9 Georgia, "Times New Roman", serif;
+  letter-spacing: -.07em;
+}
+
+.auth-intro {
+  max-width: 610px;
+  margin: 0;
+  color: #bdb1a7;
+  font-size: clamp(17px, 1.5vw, 23px);
+  line-height: 1.55;
+}
+
+.auth-evidence {
+  max-width: 620px;
+  margin-top: 46px;
+  border-top: 1px solid rgba(196, 151, 115, .24);
+}
+
+.auth-evidence > div {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #e8ddd3;
+  border-bottom: 1px solid rgba(196, 151, 115, .18);
+  font-size: 15px;
+}
+
+.auth-evidence span {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  color: #c59069;
+  background: rgba(139, 94, 60, .09);
+  border: 1px solid rgba(196, 139, 98, .22);
+  border-radius: 50%;
+}
+
+.auth-evidence svg {
+  width: 17px;
+}
+
+.owner-threshold-access {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(44px, 6vw, 92px);
+}
+
+.auth-local-state {
+  position: absolute;
+  top: 34px;
+  right: 42px;
+}
+
+.owner-threshold-access form {
+  width: min(100%, 560px);
+  margin: 0 auto;
+  padding: clamp(34px, 4vw, 58px);
+  background: #15110f;
+  border: 1px solid rgba(190, 132, 91, .48);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .22);
+}
+
+.auth-form-heading {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 42px;
+}
+
+.auth-form-heading > span {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  color: #c9926c;
+  border: 1px solid rgba(190, 132, 91, .4);
+  border-radius: 13px;
+}
+
+.auth-form-heading svg {
+  width: 19px;
+}
+
+.auth-form-heading small {
+  color: #8f8176;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.auth-form-heading h2 {
+  margin: 4px 0 0;
+  color: #f4ede5;
+  font: 400 clamp(38px, 4vw, 58px)/1 Georgia, "Times New Roman", serif;
+  letter-spacing: -.055em;
+}
+
+.owner-threshold-access label {
+  display: block;
+  margin-bottom: 10px;
+  color: #d8ccc1;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.owner-threshold-access input {
+  width: 100%;
+  height: 58px;
+  padding: 0 16px;
+  color: #f7f0e9;
+  background: #0f0d0c;
+  border: 1px solid #5c4638;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.owner-threshold-access button {
+  width: 100%;
+  min-height: 58px;
+  margin-top: 18px;
+  color: #fff8f1;
+  background: #8b5e3c;
+  border: 1px solid #a97855;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 800;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.owner-threshold-access button:hover:not(:disabled) {
+  background: #9c6b47;
+  transform: translateY(-1px);
+}
+
+.owner-threshold-access button:disabled {
+  cursor: not-allowed;
+  opacity: .55;
+}
+
+.auth-error,
+.auth-configuration-error {
+  color: #ffd5cb;
+  background: rgba(154, 59, 41, .16);
+  border: 1px solid rgba(233, 111, 91, .32);
+  border-radius: 10px;
+}
+
+.auth-error {
+  margin: 12px 0 0;
+  padding: 11px 13px;
+  font-size: 12px;
+}
+
+.auth-configuration-error {
+  padding: 18px;
+}
+
+.auth-configuration-error p {
+  margin: 7px 0 0;
+  color: #c8afa8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.auth-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 28px 0 0;
+  color: #867970;
+  font-size: 11px;
+}
+
+.auth-time svg {
+  width: 15px;
+}
+
+.owner-threshold-loading {
+  grid-template-columns: 1fr;
+  place-items: center;
+  align-content: center;
+  padding: 32px;
+  text-align: center;
+}
+
+.owner-threshold-loading h1 {
+  max-width: 700px;
+  font-size: clamp(38px, 5vw, 70px);
+}
+
+.owner-threshold-loading p {
+  color: #c9bbb0;
+}
+
+@media (max-width: 860px) {
+  .owner-threshold {
+    grid-template-columns: 1fr;
+  }
+
+  .owner-threshold-brief {
+    min-height: auto;
+    padding: 34px 22px 30px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(190, 132, 91, .25);
+  }
+
+  .auth-brand {
+    margin-bottom: 34px;
+    font-size: 24px;
+  }
+
+  .auth-brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .owner-threshold h1 {
+    margin-top: 18px;
+    font-size: clamp(50px, 14vw, 74px);
+  }
+
+  .auth-intro {
+    font-size: 16px;
+  }
+
+  .auth-evidence {
+    display: none;
+  }
+
+  .owner-threshold-access {
+    padding: 32px 18px 50px;
+  }
+
+  .auth-local-state {
+    display: none;
+  }
+
+  .owner-threshold-access form {
+    padding: 28px 22px;
+  }
+
+  .auth-form-heading {
+    margin-bottom: 30px;
+  }
+}

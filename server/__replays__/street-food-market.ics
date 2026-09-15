@@ -1,0 +1,32 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//example-street-food-market.de//events//DE
+BEGIN:VEVENT
+UID:event-8585@example-street-food-market.de
+SUMMARY:Bad D\, Street Food Festi
+ val 2026
+DTSTART;VALUE=DATE:20260814
+DTEND;VALUE=DATE:20260817
+LOCATION:Saline\, 67098 Bad Dürkheim
+URL:https://example.test/event/bad-duerkheim
+DESCRIPTION:Internationale Food Trucks
+END:VEVENT
+BEGIN:VEVENT
+UID:event-9001@example-street-food-market.de
+SUMMARY:Landauer Street Food Festival
+DTSTART;TZID=Europe/Berlin:20261023T160000
+DTEND;TZID=Europe/Berlin:20261025T200000
+LOCATION:Alter Messplatz Landau
+END:VEVENT
+BEGIN:VEVENT
+UID:event-7000@example-street-food-market.de
+SUMMARY:Fruehlingsfest 2026
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260406
+END:VEVENT
+BEGIN:VEVENT
+UID:utc-1@example-street-food-market.de
+SUMMARY:Abendmarkt
+DTSTART:20260814T160000Z
+END:VEVENT
+END:VCALENDAR

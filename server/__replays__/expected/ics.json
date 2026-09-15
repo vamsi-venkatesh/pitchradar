@@ -1,0 +1,54 @@
+{
+  "replay": "ics",
+  "family": "ics",
+  "file": "street-food-market.ics",
+  "count": 3,
+  "occurrences": [
+    {
+      "sourceRecordKey": "event-8585@example-street-food-market.de",
+      "rawName": "Bad D, Street Food Festival 2026",
+      "rawLocation": "Saline, 67098 Bad Dürkheim",
+      "rawStartsAt": "2026-08-14",
+      "rawEndsAt": "2026-08-16",
+      "rawPayload": {
+        "extraction": "ics",
+        "startsOn": "2026-08-14",
+        "endsOn": "2026-08-16",
+        "city": "Bad Dürkheim",
+        "locationText": "Saline, 67098 Bad Dürkheim",
+        "eventUrl": "https://example.test/event/bad-duerkheim",
+        "icsUid": "event-8585@example-street-food-market.de",
+        "description": "Internationale Food Trucks"
+      },
+      "contentHash": "5d582d7eef79cca195f819ce707f6b816339184da9ce179778524171ebe39190"
+    },
+    {
+      "sourceRecordKey": "event-9001@example-street-food-market.de",
+      "rawName": "Landauer Street Food Festival",
+      "rawLocation": "Alter Messplatz Landau",
+      "rawStartsAt": "2026-10-23T16:00:00",
+      "rawEndsAt": "2026-10-25T20:00:00",
+      "rawPayload": {
+        "extraction": "ics",
+        "startsOn": "2026-10-23",
+        "endsOn": "2026-10-25",
+        "locationText": "Alter Messplatz Landau",
+        "icsUid": "event-9001@example-street-food-market.de"
+      },
+      "contentHash": "ca7d8f391709b9f371d5cd9a6cb6596f617d03b2ed0df2b173c454388d114414"
+    },
+    {
+      "sourceRecordKey": "utc-1@example-street-food-market.de",
+      "rawName": "Abendmarkt",
+      "rawStartsAt": "2026-08-14T18:00:00",
+      "rawEndsAt": "2026-08-14",
+      "rawPayload": {
+        "extraction": "ics",
+        "startsOn": "2026-08-14",
+        "endsOn": "2026-08-14",
+        "icsUid": "utc-1@example-street-food-market.de"
+      },
+      "contentHash": "5ae919ad9e09cc0677a7f79cfc1c7fb2ea1e26e35338d0fe1415c269c0c5dd4e"
+    }
+  ]
+}

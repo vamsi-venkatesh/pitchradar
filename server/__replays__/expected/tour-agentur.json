@@ -1,0 +1,25 @@
+{
+  "replay": "tour-agentur",
+  "family": "tour-agentur",
+  "file": "tour-agentur.json",
+  "count": 1,
+  "occurrences": [
+    {
+      "sourceRecordKey": "tour-agentur:2026-07-30:bergheim",
+      "rawName": "Street Food Drink & Music Festival Bergheim",
+      "rawLocation": "Bergheim",
+      "rawStartsAt": "2026-07-30",
+      "rawEndsAt": "2026-08-02",
+      "rawPayload": {
+        "eventUrl": "https://www.example-tour-agentur.de/tourplan2026",
+        "applicationUrl": "https://www.example-tour-agentur.de/bewerbungsformular",
+        "routeOwner": "Beispiel Tour-Agentur",
+        "eventType": "street_food",
+        "city": "Bergheim",
+        "startsOn": "2026-07-30",
+        "endsOn": "2026-08-02"
+      },
+      "contentHash": "54f989202457e04777ea0d9d23d3a7a831e92e563bb46e8c92ee32be4d7614b7"
+    }
+  ]
+}

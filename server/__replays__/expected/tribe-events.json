@@ -1,0 +1,28 @@
+{
+  "replay": "tribe-events",
+  "family": "tribe-events",
+  "file": "tribe-events.json",
+  "count": 1,
+  "occurrences": [
+    {
+      "sourceRecordKey": "2078",
+      "rawName": "Food Truck Festival Oberasbach 2026",
+      "rawLocation": "Rathausplatz Oberasbach, Oberasbach, 90522",
+      "rawStartsAt": "2026-08-01 12:00:00",
+      "rawEndsAt": "2026-08-02 19:00:00",
+      "rawPayload": {
+        "id": 2078,
+        "title": "Food Truck Festival Oberasbach 2026",
+        "url": "https://events.example.test/event/2078",
+        "start_date": "2026-08-01 12:00:00",
+        "end_date": "2026-08-02 19:00:00",
+        "venue": {
+          "venue": "Rathausplatz Oberasbach",
+          "city": "Oberasbach",
+          "zip": "90522"
+        }
+      },
+      "contentHash": "6832389d3a11e99a0453037dd9e79e2fd3ab04f6862519a200014cbf9d49f5c0"
+    }
+  ]
+}

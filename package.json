@@ -1,0 +1,52 @@
+{
+  "name": "pitchradar",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "agent": "tsx server/index.ts",
+    "agent:watch": "tsx watch server/index.ts",
+    "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "preview": "tsx server/index.ts",
+    "sources:check": "tsx scripts/source-health.ts",
+    "sources:collect": "tsx scripts/run-collector.ts",
+    "sources:collect:all": "tsx scripts/run-collector.ts --all",
+    "sources:normalize": "tsx scripts/run-normalizer.ts",
+    "intelligence:refresh": "tsx scripts/run-intelligence.ts",
+    "contacts:resolve": "tsx scripts/run-contact-resolver.ts",
+    "verification:queue": "tsx scripts/run-verification-queue.ts",
+    "relevance:backfill": "tsx scripts/backfill-relevance.ts",
+    "dedup:merge": "tsx scripts/merge-duplicates.ts",
+    "bookings:lifecycle": "tsx scripts/run-booking-lifecycle.ts",
+    "cycle": "tsx scripts/run-cycle.ts",
+    "cycle:scheduled": "tsx scripts/run-cycle.ts --scheduled",
+    "auth:hash": "tsx scripts/hash-owner-password.ts",
+    "db:migrate": "tsx scripts/db-migrate.ts",
+    "db:seed": "tsx scripts/db-seed.ts",
+    "eval:golden": "tsx scripts/eval/run-golden.mts",
+    "report": "tsx scripts/generate-report.ts"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.4.1",
+    "dotenv": "^17.4.2",
+    "exceljs": "^4.4.0",
+    "lucide-react": "^0.468.0",
+    "pg": "^8.22.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tsx": "^4.19.2",
+    "undici": "^8.9.0",
+    "vite": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "@types/pg": "^8.20.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "playwright-core": "^1.63.0",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  }
+}
