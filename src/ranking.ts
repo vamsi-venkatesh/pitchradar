@@ -41,11 +41,30 @@ export function vendorRelevanceOf(
   return event.vendorRelevance ?? "unclear";
 }
 
+/**
+ * The calendar day an instant falls on IN THE OPERATOR'S TIMEZONE.
+ *
+ * Every event timestamp is Berlin wall-clock with its offset attached. Reading
+ * it with the machine's local getters makes the answer depend on where the code
+ * runs: on a UTC host, a one-day festival that ends at 23:59+02:00 ends on the
+ * PREVIOUS calendar day, so it counts as two trading days and its weekdays
+ * shift by one. The operator's calendar is Europe/Berlin wherever this runs.
+ */
+const BERLIN_DAY = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Berlin",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit"
+});
+
+function berlinDayStartUtc(instant: Date): number {
+  const [year, month, day] = BERLIN_DAY.format(instant).split("-").map(Number);
+  return Date.UTC(year, month - 1, day);
+}
+
 export function tradingDays(event: Pick<EventOpportunity, "startsAt" | "endsAt">): number {
-  const start = new Date(event.startsAt);
-  const end = new Date(event.endsAt);
-  const startDay = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
-  const endDay = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
+  const startDay = berlinDayStartUtc(new Date(event.startsAt));
+  const endDay = berlinDayStartUtc(new Date(event.endsAt));
   return Math.max(1, Math.round((endDay - startDay) / MS_DAY) + 1);
 }
 
@@ -132,12 +151,11 @@ function homeRegionsFor(profile: ClientProfile): string[] {
 
 /** Every calendar day the event trades on, as JS day numbers (0 = Sunday). */
 function tradingWeekdays(event: Pick<EventOpportunity, "startsAt" | "endsAt">): number[] {
-  const start = new Date(event.startsAt);
+  const startDay = berlinDayStartUtc(new Date(event.startsAt));
   const days = tradingDays(event);
   const out: number[] = [];
   for (let i = 0; i < days; i += 1) {
-    const day = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
-    out.push(day.getDay());
+    out.push(new Date(startDay + i * MS_DAY).getUTCDay());
   }
   return out;
 }
